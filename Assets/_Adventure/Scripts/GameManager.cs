@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
 
     // Coin
     private int totalCoin = 0;
+    [SerializeField]private int ReviveCoin = 200;
 
     // Prefab ID
     [HideInInspector] public int CoinID = -1;
@@ -87,6 +88,7 @@ public class GameManager : MonoBehaviour
         {
             score.text = "You get: " + (currentKilled * 10).ToString() + " Score";
             OpenWindow(1);
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Lose);
         };
 
         GameWin += () =>
@@ -102,6 +104,10 @@ public class GameManager : MonoBehaviour
         GameRevive += () =>
         {
             
+        };
+        UpLevel += () =>
+        {
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.LevelUp);
         };
     }
     public int Kill
@@ -144,9 +150,9 @@ public class GameManager : MonoBehaviour
 
     public void Revive()
     {
-        if(TotalCoin >= 2)
+        if(TotalCoin >= ReviveCoin)
         {
-            TotalCoin -= 2;
+            TotalCoin -= ReviveCoin;
             CloseWindow(1);
         }
         else
@@ -223,6 +229,7 @@ public class GameManager : MonoBehaviour
                 group.blocksRaycasts = true;
                 group.interactable = true;
                 Time.timeScale = 0;
+                LosePanel.GetComponentsInChildren<Button>()[0].interactable = (TotalCoin >= 200 ? true: false);
                 break;
             default:
                 break;

@@ -84,5 +84,6 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     public void OnPointerClick(PointerEventData eventData)
     {
         GameManager.Instance?.UplevelWeapon_(data.itemType.ToString());
+        AudioManager.instance?.PlaySfx(AudioManager.Sfx.Confirm);
     }
 }

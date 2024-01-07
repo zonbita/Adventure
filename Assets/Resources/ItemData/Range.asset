@@ -15,10 +15,10 @@ MonoBehaviour:
   itemType: 2
   itemId: 0
   itemName: Blue FireBall
-  itemDesc: 'Take Big Damage
+  itemDesc: 'Take small damage
 
 '
-  itemIcon: {fileID: -1256577424, guid: cfe7610c0d303f54fab9d1cc0c9fd940, type: 3}
+  itemIcon: {fileID: 874343242196921964, guid: 5547e92425a5b584ba72bba3566474f0, type: 3}
   baseDamage: 30
   baseCount: 3
   damages:

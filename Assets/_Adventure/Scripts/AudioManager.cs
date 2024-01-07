@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
@@ -14,13 +17,13 @@ public class AudioManager : MonoBehaviour
     AudioHighPassFilter bgmEffect;
 
     [Header("#SFX")]
-    public AudioClip[] sfxClips;
+    [Tooltip(" 0: Dead, 1: Hit, 2: LevelUp, 3: Lose, 4: Melee, 5: Range, 6: Drop, 7: Win, 8: Loot, 9:Confirm, 10:Buy")] public AudioClip[] sfxClips;
     public float sfxVolume;
     public int channels;
     AudioSource[] sfxPlayers;
     int channelIndex;
 
-    public enum Sfx { Dead, Hit, LevelUp, Lose, Melee, Range, Drop, Win, Loot }
+    public enum Sfx { Dead, Hit, LevelUp, Lose, Melee, Range, Drop, Win, Loot, Confirm, Buy}
 
     void Awake()
     {
@@ -120,7 +123,7 @@ public class AudioManager : MonoBehaviour
             int ranIndex = 0;
             if (sfx == Sfx.Hit || sfx == Sfx.Melee)
             {
-                ranIndex = Random.Range(0, 2);
+                ranIndex = UnityEngine.Random.Range(0, 2);
             }
 
             channelIndex = loopIndex;
@@ -132,5 +135,20 @@ public class AudioManager : MonoBehaviour
             break;
         }
     }
+
+#if UNITY_EDITOR
+    [ContextMenu("Initialize SfxClips")]
+
+    private void InitializeSfxClips()
+    {
+        // Get the values of the Sfx enum
+        Sfx[] sfxValues = (Sfx[])Enum.GetValues(typeof(Sfx));
+
+        sfxClips = new AudioClip[sfxValues.Length];
+
+        Debug.Log("SfxClips initialized in Editor.");
+        EditorUtility.SetDirty(this);
+    }
+#endif
 
 }

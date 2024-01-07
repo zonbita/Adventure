@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae9284f11f98ba64a81bbb0d01efd61e, type: 3}
+  m_Name: Melee
+  m_EditorClassIdentifier: 
+  itemType: 1
+  itemId: 0
+  itemName: FireBall
+  itemDesc: 
+  itemIcon: {fileID: 0}
+  baseDamage: 0
+  baseCount: 0
+  damages: []
+  counts: 
+  projectile: {fileID: 8488780647853429835, guid: d7736937eb22b1c43b627d0242e78bad, type: 3}

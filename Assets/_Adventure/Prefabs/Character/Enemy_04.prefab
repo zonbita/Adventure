@@ -85,10 +85,9 @@ MonoBehaviour:
   nextWayPointDistance: 0.3
   repeatTimeUpdatePath: 0.5
   characterSR: {fileID: 4398302326340471489}
-  animator: {fileID: 0}
   minDamage: 2
   maxDamage: 4
-  freezeDurationTime: 0.4
+  freezeDurationTime: 0
 --- !u!114 &1926085311155766294
 MonoBehaviour:
   m_ObjectHideFlags: 0
