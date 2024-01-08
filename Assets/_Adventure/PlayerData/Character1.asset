@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Character1
   m_EditorClassIdentifier: 
   id: 0
-  playerName: 
-  damage: 0
+  playerName: Jelly Copper
+  SpriteCharacter: {fileID: 21300000, guid: 590b73e132435194da7d40dc8a3816f0, type: 3}
   currentHealth: 0
   maxHealth: 0
+  price: 50

@@ -5,9 +5,10 @@ public class PlayerData_SO : ScriptableObject
 {
     public int id;
     public string playerName;
-    public int damage;
+    public Sprite SpriteCharacter;
     public int currentHealth;
     public int maxHealth;
+    public int price;
 
     public PlayerData GetDataInstance()
     {
@@ -15,9 +16,11 @@ public class PlayerData_SO : ScriptableObject
         {
             id = this.id,
             playerName = this.playerName,
-            damage = this.damage,
+            SpriteCharacter = this.SpriteCharacter,
             maxHealth = this.maxHealth,
             currentHealth = this.currentHealth,
+            price = this.price,
         };
     }
+
 }

@@ -126,4 +126,8 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void ChangeSprite(Sprite s)
+    {
+        characterSR.sprite = s;
+    }
 }

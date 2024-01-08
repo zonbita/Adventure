@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     public Player Player;
 
     [Header("# Panel List")]
+    public GameObject ShopPanel;
     public GameObject SettingPanel;
     public GameObject LosePanel;
     public GameObject ListCard;
@@ -218,18 +219,19 @@ public class GameManager : MonoBehaviour
         {
             case 0:
                 group = SettingPanel.GetComponent<CanvasGroup>();
-                group.alpha = 1;
-                group.blocksRaycasts = true;
-                group.interactable = true;
+                PanelAlpha(group, 1);
                 Time.timeScale = 0;
                 break;
             case 1:
                 group = LosePanel.GetComponent<CanvasGroup>();
-                group.alpha = 1;
-                group.blocksRaycasts = true;
-                group.interactable = true;
+                PanelAlpha(group, 1);
                 Time.timeScale = 0;
                 LosePanel.GetComponentsInChildren<Button>()[0].interactable = (TotalCoin >= 200 ? true: false);
+                break;
+            case 2:
+                group = ShopPanel.GetComponent<CanvasGroup>();
+                PanelAlpha(group, 1);
+                Time.timeScale = 0;
                 break;
             default:
                 break;
@@ -242,21 +244,39 @@ public class GameManager : MonoBehaviour
         {
             case 0:
                 group = SettingPanel.GetComponent<CanvasGroup>();
-                group.alpha = 0;
-                group.blocksRaycasts = false;
-                group.interactable = false;
+                PanelAlpha(group,0);
                 Time.timeScale = 1;
                 break;
             case 1:
                 group = LosePanel.GetComponent<CanvasGroup>();
-                group.alpha = 0;
-                group.blocksRaycasts = false;
-                group.interactable = false;
+                PanelAlpha(group, 0);
                 GameRevive();
+                break;
+            case 2:
+                group = ShopPanel.GetComponent<CanvasGroup>();
+                PanelAlpha(group, 0);
+                Time.timeScale = 1;
                 break;
             default:
                 break;
         }
+    }
+
+    private void PanelAlpha(CanvasGroup group,int i)
+    {
+        if(i == 0)
+        {
+            group.alpha = 0;
+            group.blocksRaycasts = false;
+            group.interactable = false;
+        }
+        else
+        {
+            group.alpha = 1;
+            group.blocksRaycasts = true;
+            group.interactable = true;
+        }
+
     }
 
     public void UpdateBar(int value, int maxValue, string text)

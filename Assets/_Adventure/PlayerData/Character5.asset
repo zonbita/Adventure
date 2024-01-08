@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Character5
   m_EditorClassIdentifier: 
   id: 0
-  playerName: 
-  damage: 0
+  playerName: Jerry Earth
+  SpriteCharacter: {fileID: 21300000, guid: 764f930ba03e6324d805335eb66b8c98, type: 3}
   currentHealth: 0
   maxHealth: 0
+  price: 500

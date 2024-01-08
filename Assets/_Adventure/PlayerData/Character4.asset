@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Character4
   m_EditorClassIdentifier: 
   id: 0
-  playerName: 
-  damage: 0
+  playerName: Jelly Foot
+  SpriteCharacter: {fileID: 21300000, guid: 2d5d6782fc427ad498ff00ded71060f4, type: 3}
   currentHealth: 0
   maxHealth: 0
+  price: 250
