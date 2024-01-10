@@ -24,3 +24,4 @@ public class PlayerData_SO : ScriptableObject
     }
 
 }
+
