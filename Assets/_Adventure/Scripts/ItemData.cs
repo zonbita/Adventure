@@ -10,7 +10,7 @@ public class ItemData : ScriptableObject
     {
         Instance = this;
     }
-    public enum ItemType { Default, Melee, Range, Rotator, Heal }
+    public enum ItemType { Default, Melee, Range, Rotator, Tool }
 
     [Header("# Main Info")]
     public ItemType itemType;

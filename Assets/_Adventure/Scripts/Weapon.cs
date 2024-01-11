@@ -158,12 +158,17 @@ public class Weapon : MonoBehaviour
         {
             Transform bullet = GameManager.Instance.pool.Get(prefabId).transform;
             bullet.position = transform.position;
-            Vector3 rotVec = Vector3.forward * 360 * index / count;
-            Quaternion rotation = Quaternion.Euler(rotVec);
-            bullet.Rotate(rotVec);
-            bullet.Translate(bullet.up, Space.World);
-            bullet.GetComponent<Bullet>()?.Init(DamageTotal + minDamage, DamageTotal + maxDamage, rotation * new Vector3(1,0,0) * bulletForce);
 
+            // Calculate rotation
+            Quaternion rotation = Quaternion.Euler(0, 0, 360f * index / count);
+
+            // Apply rotation
+            bullet.rotation = rotation;
+
+            // Translate based on the rotated up vector
+            bullet.Translate(bullet.up, Space.World);
+
+            bullet.GetComponent<Bullet>()?.Init(DamageTotal + minDamage, DamageTotal + maxDamage, rotation * Vector3.up * bulletForce);
 
             yield return new WaitForSeconds(0);
         }

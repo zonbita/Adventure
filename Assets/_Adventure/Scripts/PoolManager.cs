@@ -7,7 +7,7 @@ public class PoolManager : MonoBehaviour
     public static PoolManager instance;
     public GameObject[] prefabs;
 
-    List<GameObject>[] pools;
+    public List<GameObject>[] pools;
 
     void Awake()
     {

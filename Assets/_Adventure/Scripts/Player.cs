@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
 
     public Rigidbody2D rb;
     public SpriteRenderer characterSR;
+    public Health health;
     Animator animator;
 
     public float dashBoost = 2f;
@@ -31,8 +32,9 @@ public class Player : MonoBehaviour
     {
         coll = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
+        health = GetComponent<Health>();
         animator = GetComponentInChildren<Animator>();
-
+        
         GameManager.Instance.GameOver += GameOver;
         GameManager.Instance.GameWin += GameWin;
         GameManager.Instance.GameStart += GameStart;
@@ -120,7 +122,7 @@ public class Player : MonoBehaviour
             }
 
         }
-        if (GetComponent<Health>().isDead)
+        if (health.isDead)
         {
             GameManager.Instance.GameOver();
         }

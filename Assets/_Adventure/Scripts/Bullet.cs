@@ -38,7 +38,7 @@ public class Bullet : MonoBehaviour
                 
                 int damage = Random.Range(minDamage, maxDamage);
                 collision.GetComponent<Health>().TakeDam(damage);
-                collision.GetComponent<EnemyController>().TakeDamEffect(damage);
+                collision.GetComponent<EnemyController>()?.TakeDamEffect(damage);
                 gameObject.SetActive(IsBullet ? false : true);
 
         }

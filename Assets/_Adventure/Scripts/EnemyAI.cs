@@ -37,11 +37,6 @@ public class EnemyAI : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (force.x != 0)
-            if (force.x < 0)
-                transform.localScale = new Vector3(-1, 1, 0);
-            else
-                transform.localScale = new Vector3(1, 1, 0);
     }
 
     void CalculatePath()
@@ -90,6 +85,11 @@ public class EnemyAI : MonoBehaviour
             if (distance < nextWayPointDistance)
                 currentWP++;
 
+
+            if (force.x >= 0.01f)
+                characterSR.flipX = false;
+            else if (force.x <= .01f)
+                characterSR.flipX = true;
 
             yield return null;
         }

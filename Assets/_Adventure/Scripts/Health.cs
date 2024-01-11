@@ -27,13 +27,20 @@ public class Health : MonoBehaviour
         GameManager.Instance.GameRevive += Revive;
     }
 
-    private void Revive()
+    public void Revive()
     {
         currentHealth = maxHealth;
         isDead = false;
         if (healthBar != null)
             healthBar.UpdateHealth(currentHealth, maxHealth);
 
+    }
+
+    public void Healing(int i)
+    {
+        currentHealth = Mathf.Clamp(i, currentHealth, maxHealth);
+        if (healthBar != null)
+            healthBar.UpdateHealth(currentHealth, maxHealth);
     }
 
     public void TakeDam(int damage)

@@ -8,23 +8,32 @@ public class Boss_Base : MonoBehaviour
     public float moveSpeed = 2f;
     public float repeatTimeUpdatePath = 0.5f;
     public float nextWayPointDistance = 3f;
+    public bool Roaming = false;
+
     [SerializeReference] Transform target;
+
     Vector2 force;
     Health health;
     Path path;
     Seeker seeker;
     Coroutine moveCoroutine;
     Rigidbody2D rb;
-
+    SpriteRenderer sr;
 
     private void Awake()
     {
+        sr = GetComponentInChildren<SpriteRenderer>();
         health = GetComponent<Health>();
         health.maxHealth = Boss_Data_SO.maxHealth;
 
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         target = FindObjectOfType<Player>().transform;
+    }
+
+    private void FixedUpdate()
+    {
+
     }
 
     void Start()
@@ -68,6 +77,10 @@ public class Boss_Base : MonoBehaviour
             if (distance < nextWayPointDistance)
                 currentWP++;
 
+            if (force.x >= 0.01f)
+                sr.flipX =  false;
+            else if(force.x <= .01f)
+                sr.flipX = true;
 
             yield return null;
         }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+using System.Linq;
 
 public enum Phase{
     Home,
@@ -301,5 +302,18 @@ public class GameManager : MonoBehaviour
         group.blocksRaycasts = true;
         group.interactable = true;
         Time.timeScale = 0;
+    }
+
+    public void HarvertAllCoin()
+    {
+        GameObject[] coins = GameObject.FindGameObjectsWithTag("Coin");
+        if (coins.Length > 0)
+        {
+            foreach (GameObject g in coins)
+            {
+                g.GetComponent<Follow>()?.Reset();
+
+            }
+        }
     }
 }

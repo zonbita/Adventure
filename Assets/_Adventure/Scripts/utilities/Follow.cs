@@ -31,9 +31,10 @@ public class Follow : MonoBehaviour
             }
             else
             {
+                this.gameObject.SetActive(false);
                 updateEnabled = false;
                 GameManager.Instance.TotalCoin++;
-                this.gameObject.SetActive(false);
+                
             }
             
         }
