@@ -2,36 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Bullet : MonoBehaviour
 {
-    public int minDamage = 6;
-    public int maxDamage = 16;
+
+    protected int minDamage = 6;
+    protected int maxDamage = 16;
     public bool IsBullet = true;
-    Rigidbody2D rigid;
+    protected Rigidbody2D rb;
 
-    void Awake()
+    public virtual void Awake()
     {
-        rigid = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Init(int minDamage, int maxDamage)
-    {
-        this.minDamage = minDamage;
-        this.maxDamage = maxDamage;
-    }
-
-    public void Init(int minDamage, int maxDamage, Vector2 bulletForce)
+    public virtual void Init(int minDamage, int maxDamage)
     {
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
-        rigid.AddForce( bulletForce, ForceMode2D.Impulse);
     }
 
-    private void Start()
-    { 
+    public virtual void Init(int minDamage, int maxDamage, Vector2 bulletForce)
+    {
+        this.minDamage = minDamage;
+        this.maxDamage = maxDamage;
+        rb.AddForce( bulletForce, ForceMode2D.Impulse);
+    }
+
+ 
+    protected virtual void Start()
+    {
         AudioManager.instance?.PlaySfx(AudioManager.Sfx.Range);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
         {
@@ -43,4 +47,5 @@ public class Bullet : MonoBehaviour
 
         }
     }
+
 }
