@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 0
   itemId: 0
-  itemName: FireBall
+  itemName: <color=red>FireBall</color>
   itemDesc: 'Take small damage
 
 '

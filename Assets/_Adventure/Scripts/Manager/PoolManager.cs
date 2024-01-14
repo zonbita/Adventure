@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class PoolManager : MonoBehaviour
 {
-    public static PoolManager instance;
     public GameObject[] prefabs;
 
     public List<GameObject>[] pools;
 
     void Awake()
     {
-        instance = this;
         pools = new List<GameObject>[prefabs.Length];
 
         for (int index = 0; index < pools.Length; index++)

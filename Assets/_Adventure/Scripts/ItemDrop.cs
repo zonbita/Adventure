@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
@@ -14,28 +13,8 @@ public class ItemDrop : MonoBehaviour
         col = GetComponent<BoxCollider2D>();
         col.isTrigger = true;
     }
-
-    private void OnTriggerEnter2D(Collider2D c)
+    private void Start()
     {
-        if(c.CompareTag("Player"))
-        {
-            if (c.enabled)
-            {
-                
-                c.enabled = false;
-                switch (data.itemName)
-                {
-                    case "Magnet":
-                        GameManager.Instance?.HarvertAllCoin();
-                        break;
-                    case "Healing":
-                        GameManager.Instance?.Player.health.Healing(data.baseDamage);
-                        break;
-                }
-                Destroy(this.gameObject);
-
-            }
-
-        }
+        transform.DOPunchPosition(new Vector3(0, 1, 0), 4, 1, 0);
     }
 }

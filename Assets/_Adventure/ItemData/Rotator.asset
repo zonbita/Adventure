@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 3
   itemId: 0
-  itemName: Rotator
+  itemName: <color=orange>Rotator</color>
   itemDesc: 'Spin around yourself
 
 '

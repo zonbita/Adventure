@@ -1,13 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 public class Player : MonoBehaviour
 {
+    Controls controls;
+
     public float moveSpeed = 5f;
 
     public Rigidbody2D rb;
@@ -28,6 +26,15 @@ public class Player : MonoBehaviour
     public Vector3 HealthBarOffset = new Vector3(0f, -15.42f, 0f);
     Collider2D coll;
 
+    private void Awake()
+    {
+/*        controls = new Controls();
+        controls.Player.Move.performed += c =>
+        {
+            moveInput.x = c.ReadValue<float>();
+        };*/
+    }
+
     private void Start()
     {
         coll = GetComponent<Collider2D>();
@@ -38,7 +45,7 @@ public class Player : MonoBehaviour
         GameManager.Instance.GameOver += GameOver;
         GameManager.Instance.GameWin += GameWin;
         GameManager.Instance.GameStart += GameStart;
-
+         
        
     }
 
@@ -76,7 +83,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && dashTime <= 0)
         {
-            animator.SetBool("Roll", true);
+            //animator.SetBool("Roll", true);
             moveSpeed += dashBoost;
             dashTime = DashTime;
             once = true;
@@ -131,5 +138,15 @@ public class Player : MonoBehaviour
     public void ChangeSprite(Sprite s)
     {
         characterSR.sprite = s;
+    }
+
+    private void OnEnable()
+    {
+        //controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+       // controls.Disable();
     }
 }

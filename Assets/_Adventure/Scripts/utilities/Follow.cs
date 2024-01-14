@@ -33,8 +33,12 @@ public class Follow : MonoBehaviour
             {
                 this.gameObject.SetActive(false);
                 updateEnabled = false;
-                GameManager.Instance.TotalCoin++;
-                
+                if(this.gameObject.GetComponent<Coin>())
+                    GameManager.Instance.TotalCoin++;
+                this.gameObject.GetComponent<Exp>()?.Up_Exp();
+
+
+
             }
             
         }

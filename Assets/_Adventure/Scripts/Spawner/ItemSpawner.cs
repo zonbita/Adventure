@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemSpawner : MonoBehaviour
 {
     public static ItemSpawner instance;
+    public bool bDebug = false, spawned = false;
     [Serializable]
     public class SpawnableItem
     {
@@ -22,27 +23,38 @@ public class ItemSpawner : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine("SpawnRandomItem", SpawningTime); 
+        InvokeRepeating("Reset", SpawningTime, SpawningTime); 
     }
 
-    IEnumerable SpawnRandomItem()
+    void Reset()
     {
-        // Generate a random number between 0 and 1
-        float randomValue = UnityEngine.Random.value;
+        spawned = true;
+    }
 
-        // choose item
-        float Weight = 0f;
-        foreach (var spawnableItem in spawnableItems)
+    public void SpawnRandomItem(Vector3 p)
+    {
+        if (spawned == true)
         {
-            Weight += spawnableItem.spawnChance / 100f;
+            // Generate a random number between 0 and 1
+            float randomValue = UnityEngine.Random.value;
 
-            if (randomValue <= Weight)
+            // choose item
+            float Weight = 0f;
+            foreach (var spawnableItem in spawnableItems)
             {
-                Instantiate(spawnableItem.itemPrefab, transform.position, Quaternion.identity);
-                Debug.Log("Spawned: " + spawnableItem.itemPrefab.name);
-                yield return null;
+                Weight += spawnableItem.spawnChance / 100f;
+
+                if (randomValue <= Weight)
+                {
+
+                    Instantiate(spawnableItem.itemPrefab, p, Quaternion.identity);
+                    if (bDebug) Debug.Log("Spawned: " + spawnableItem.itemPrefab.name);
+                    spawned = false;
+                    break;
+                }
             }
         }
-        yield return null;
+
+
     }
 }

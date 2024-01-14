@@ -35,8 +35,12 @@ public class EnemyAI : MonoBehaviour
         InvokeRepeating("CalculatePath", 0f, repeatTimeUpdatePath);
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
+        if (force.x >= 0.005f && characterSR.flipX != false)
+            characterSR.flipX = false;
+        else if (force.x <= .005f && characterSR.flipX != true)
+            characterSR.flipX = true;
     }
 
     void CalculatePath()
@@ -86,10 +90,6 @@ public class EnemyAI : MonoBehaviour
                 currentWP++;
 
 
-            if (force.x >= 0.01f)
-                characterSR.flipX = false;
-            else if (force.x <= .01f)
-                characterSR.flipX = true;
 
             yield return null;
         }
@@ -121,5 +121,6 @@ public class EnemyAI : MonoBehaviour
         PlayerHealth.TakeDam(damage);
         //
         PlayerHealth.GetComponent<Player>().TakeDamageEffect(damage);
+  
     }
 }

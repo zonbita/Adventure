@@ -114,10 +114,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 20
   currentHealth: 0
+  XP: 2
   healthBar: {fileID: 0}
   safeTimeDuration: 0
   isDead: 0
-  Exp: 2
   camShake: 0
 --- !u!50 &1926085311155766293
 Rigidbody2D:

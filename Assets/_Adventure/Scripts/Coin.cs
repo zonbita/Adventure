@@ -13,11 +13,11 @@ public class Coin : MonoBehaviour
     private Collider2D co;
     public void Awake()
     { 
-        value = UnityEngine.Random.Range(MinNumber,MaxNumber);
         co = GetComponent<Collider2D>();
     }
     private void Start()
     {
+        value = UnityEngine.Random.Range(MinNumber, MaxNumber);
         AudioManager.instance?.PlaySfx(AudioManager.Sfx.Drop);
     }
     private void OnEnable()

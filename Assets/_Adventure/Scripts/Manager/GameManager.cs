@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 using System.Linq;
+using UnityEngine.Networking.Types;
 
 public enum Phase{
     Home,
@@ -19,9 +20,8 @@ public enum Phase{
 }
 
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    public static GameManager Instance;
     public System.Action GameOver, GameWin, GameStart, GamePause, GameResume, GameRevive, GameInit, UpLevel, ReloadCards;
     public System.Action<GameObject> AddMonster;
     public System.Action<string> UplevelWeapon;
@@ -29,15 +29,17 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
         Application.targetFrameRate = 60;
     }
 
-    
+
     public List<TextMeshProUGUI> totalCoinTMP;
+
     [Header("# Game Object")]
+    public ItemSpawner ItemSpawner;
     public PoolManager pool;
     public GameObject CoinPrefab;
+    public GameObject ExpPrefab;
     public GameObject damPopUp;
     public GameObject DeathEffectPrefab;
     public Player Player;
@@ -57,16 +59,20 @@ public class GameManager : MonoBehaviour
     int requireExp = 10;
     public GameObject LevelPanel;
 
+
+
+
     // KILL
     public TextMeshProUGUI KillText;
     [HideInInspector] public int currentKilled = 0;
 
     // Coin
     private int totalCoin = 0;
-    [SerializeField]private int ReviveCoin = 200;
+    [SerializeField] private int ReviveCoin = 2;
 
     // Prefab ID
     [HideInInspector] public int CoinID = -1;
+    [SerializeField] public int ExpID = -1;
     [HideInInspector] public int DeathEffectID = -1;
     [HideInInspector] public int PopupID = -1;
 
@@ -77,9 +83,10 @@ public class GameManager : MonoBehaviour
     }
 
     public void StartGame()
-    {   
+    {
         // GET ID
         CoinID = pool.GetID(CoinPrefab);
+        ExpID = pool.GetID(ExpPrefab);
         DeathEffectID = pool.GetID(DeathEffectPrefab);
         PopupID = pool.GetID(damPopUp);
         KillText.text = "0";
@@ -105,7 +112,7 @@ public class GameManager : MonoBehaviour
         };
         GameRevive += () =>
         {
-            
+
         };
         UpLevel += () =>
         {
@@ -152,7 +159,7 @@ public class GameManager : MonoBehaviour
 
     public void Revive()
     {
-        if(TotalCoin >= ReviveCoin)
+        if (TotalCoin >= ReviveCoin)
         {
             TotalCoin -= ReviveCoin;
             CloseWindow(1);
@@ -169,48 +176,65 @@ public class GameManager : MonoBehaviour
         coin.position = p;
     }
 
+    public void SpawnExp(Vector3 p, int XP)
+    {
+        if (ExpID != -1)
+        {
+            Transform e = pool.Get(ExpID).transform;
+            if (e != null)
+            {
+                e.position = p;
+                Exp exp = e.gameObject.GetComponent<Exp>();
+                if (exp) exp.XP = XP;
+            }
+                
+        }
+
+    }
+
     public void SpawnDeathEffect(Vector3 p)
     {
         Transform d = pool.Get(DeathEffectID).transform;
         d.position = p;
-        SpawnCoin(p);
         Kill++;
     }
 
-
-
-    public void UpdateExperience(int addExp)
+    public int CurrentExp
     {
-        currentExp += addExp;
-        if (currentExp >= requireExp)
+        get => currentExp;
+        set
         {
-            currentLevel++;
-            currentExp = currentExp - requireExp;
-            requireExp = (int)(requireExp * 1.5f);
-            OpenLevelUpPanel();
-
-            switch (currentLevel)
+            currentExp = value;
+            if (currentExp >= requireExp)
             {
-                case 4:
-                    AddMonster(Monster[0]);
-                    break;
+                currentLevel++;
+                currentExp = currentExp - requireExp;
+                requireExp = (int)(requireExp * 1.5f);
+                OpenLevelUpPanel();
 
-                case 6:
-                    AddMonster(Monster[1]);
-                    break;
+                switch (currentLevel)
+                {
+                    case 4:
+                        AddMonster(Monster[0]);
+                        break;
 
-                case 8:
-                    AddMonster(Monster[2]);
-                    break;
+                    case 6:
+                        AddMonster(Monster[1]);
+                        break;
 
-                default:
-                    break;
+                    case 8:
+                        AddMonster(Monster[2]);
+                        break;
+
+                    default:
+                        break;
+                }
+                UpLevel();
             }
-            UpLevel();
+
+
+            UpdateBar(currentExp, requireExp, "Level " + currentLevel.ToString());
         }
-
-
-        UpdateBar(currentExp, requireExp, "Level " + currentLevel.ToString());
     }
 
     public void OpenWindow(int i)

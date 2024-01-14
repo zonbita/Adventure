@@ -1,15 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Item", menuName = "Weapon/ItemData")]
 public class ItemData : ScriptableObject
 {
-    public static ItemData Instance;
-    private void Awake()
-    {
-        Instance = this;
-    }
     public enum ItemType { Default, Melee, Range, Rotator, Tool }
 
     [Header("# Main Info")]
@@ -28,4 +21,5 @@ public class ItemData : ScriptableObject
 
     [Header("# Weapon")]
     public GameObject projectile;
+
 }

@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour
     }
 
     private void Start()
-    {
+    { 
         AudioManager.instance?.PlaySfx(AudioManager.Sfx.Range);
     }
     private void OnTriggerEnter2D(Collider2D collision)

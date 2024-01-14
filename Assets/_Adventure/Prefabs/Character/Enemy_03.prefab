@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  moveSpeed: 0.7
+  moveSpeed: 1
   nextWayPointDistance: 1
   repeatTimeUpdatePath: 4
   characterSR: {fileID: 4398302326340471489}
@@ -198,10 +198,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 30
   currentHealth: 0
+  XP: 3
   healthBar: {fileID: 0}
   safeTimeDuration: 0
   isDead: 0
-  Exp: 3
   camShake: 0
 --- !u!50 &1926085311155766293
 Rigidbody2D:

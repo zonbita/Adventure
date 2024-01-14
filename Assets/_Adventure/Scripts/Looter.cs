@@ -9,10 +9,32 @@ public class Looter : MonoBehaviour
     {
         if (collision.CompareTag("Coin"))
         {
-            //collision.enabled = false;
             collision.gameObject.GetComponent<Follow>().Reset();
-            //collision.gameObject.GetComponent<CoinAction>().enabled = true;
             AudioManager.instance?.PlaySfx(AudioManager.Sfx.Loot);
+        }
+
+        if (collision.CompareTag("Item"))
+        {
+            ItemData data = collision.gameObject.GetComponent<ItemDrop>().data;
+            if (collision.enabled && data)
+            {
+                collision.enabled = false;
+                switch (data.itemName)
+                {
+                    case "Magnet":
+                        GameManager.Instance?.HarvertAllCoin();
+                        
+                        break;
+                    case "Healing":
+                        GameManager.Instance?.Player.health.Healing(data.baseDamage);
+                        break;
+                }
+                // Deactivate or destroy the item
+                collision.gameObject.SetActive(false);
+                AudioManager.instance?.PlaySfx(AudioManager.Sfx.Loot);
+            }
+           
+
         }
     }
 

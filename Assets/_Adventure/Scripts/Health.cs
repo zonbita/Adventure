@@ -8,13 +8,12 @@ public class Health : MonoBehaviour
 {
     public int maxHealth;
     [HideInInspector] public int currentHealth;
-
+    public int XP = 1;
     public HealthBar healthBar;
 
     private float safeTime;
     public float safeTimeDuration = 0f;
     public bool isDead = false;
-    public int Exp = 1;
     public bool camShake = false;
 
     private void Start()
@@ -54,14 +53,20 @@ public class Health : MonoBehaviour
                 currentHealth = 0;
                 if (this.gameObject.tag == "Enemy")
                 {
-                    if (this.gameObject.tag == "Enemy")
+
+                    WeaponManager.instance.RemoveEnemyToFireRange(this.transform);
+                    GameManager gm = GameManager.Instance;
+                    if (gm)
                     {
-                        WeaponManager.instance.RemoveEnemyToFireRange(this.transform);
-                        GameManager.Instance?.UpdateExperience(Exp);
-                        GameManager.Instance?.SpawnDeathEffect(this.transform.position);
-                        AudioManager.instance?.PlaySfx(AudioManager.Sfx.Dead);
+                        Vector3 p = this.transform.position;
+                        gm.ItemSpawner.GetComponent<ItemSpawner>().SpawnRandomItem(p);
+                        gm.SpawnExp(p, XP);
+                        gm.SpawnDeathEffect(p);
                     }
+                    AudioManager.instance?.PlaySfx(AudioManager.Sfx.Dead);
+
                     Destroy(this.gameObject, 0.125f);
+
                 }
                 isDead = true;
             }

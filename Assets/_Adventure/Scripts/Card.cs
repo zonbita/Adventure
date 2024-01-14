@@ -36,7 +36,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
             WeaponName = data.itemName;
             Img.sprite = data.itemIcon;
             LevelText.text = "Level " + (Weapon.level + 2);
-            DesText.text = data.itemName + " \n" + data.itemDesc + "\n" + data.damages[Weapon.level] * 100 + "% Damage" + (data.counts[Weapon.level+1] != 0 ? "\n+" + data.counts[Weapon.level + 1] + " Ball" : "");
+            DesText.text = data.itemName+ " \n" + data.itemDesc + "\n<color=\"Green\">" + data.damages[Weapon.level] * 100 + "%</color> <color=\"red\">Damage</color>" + (data.counts[Weapon.level+1] != 0 ? "\n<color=\"orange\">+" + data.counts[Weapon.level + 1] + " Ball</color>" : "");
         }
             
     }
