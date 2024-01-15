@@ -9,6 +9,7 @@ TagManager:
   - Coin
   - Bullet
   - Weapon
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -46,15 +47,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Shadow
+  - name: Character
     uniqueID: 3506823549
     locked: 0
   - name: Coin
-    uniqueID: 174303159
-    locked: 0
-  - name: Character
     uniqueID: 1032920331
-    locked: 0
-  - name: Bullet
-    uniqueID: 1653950551
     locked: 0

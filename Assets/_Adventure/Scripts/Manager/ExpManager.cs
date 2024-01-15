@@ -3,15 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.U2D;
+
 [ExecuteInEditMode]
 public class ExpManager : Singleton<ExpManager>
 {
-    public Sprite[] Sprites;
+    public SpriteAtlas atlas;
+    public string[] names;
     public int[] XPList;
 
     private void Awake()
     {
-        XPList = new int[Sprites.Length];
+
+        XPList = new int[names.Length];
         for (int i = 0; i < XPList.Length; i++)
         {
             XPList[i] = 1+i;
@@ -24,7 +28,7 @@ public class ExpManager : Singleton<ExpManager>
         if (index != -1)
         {
 
-            return Sprites[index];
+            return atlas.GetSprite(names[index]);
         }
         return null;
     }
