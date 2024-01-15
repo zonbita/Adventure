@@ -22,6 +22,8 @@ public class Bullet : MonoBehaviour
         this.maxDamage = maxDamage;
     }
 
+
+
     public virtual void Init(int minDamage, int maxDamage, Vector2 bulletForce)
     {
         this.minDamage = minDamage;
@@ -35,7 +37,7 @@ public class Bullet : MonoBehaviour
         AudioManager.instance?.PlaySfx(AudioManager.Sfx.Range);
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
         {

@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 using UnityEngine.TextCore.Text;
+using UnityEngine.U2D;
 
 public class EnemyAI : MonoBehaviour
 {
-    public Transform target;
+    [Header("Sprite Atlas")]
+    public SpriteAtlas enemySpriteAtlas;
+    public string enemyName = "Jelly 0";
+    private SpriteRenderer spriteRenderer;
 
+    [Header("Variables")]
+    Transform target;
     public float moveSpeed = 2f;
     public float nextWayPointDistance = 2f;
     public float repeatTimeUpdatePath = 0.5f;
-    public SpriteRenderer characterSR;
+    
     //public Animator animator;
     public int minDamage;
     public int maxDamage;
@@ -25,6 +31,11 @@ public class EnemyAI : MonoBehaviour
     public float freezeDurationTime;
     float freezeDuration;
 
+    private void Awake()
+    {
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+    }
+
     private void Start()
     {
         seeker = GetComponent<Seeker>();
@@ -37,10 +48,14 @@ public class EnemyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (force.x >= 0.005f && characterSR.flipX != false)
-            characterSR.flipX = false;
-        else if (force.x <= .005f && characterSR.flipX != true)
-            characterSR.flipX = true;
+        if (spriteRenderer)
+        {
+            if (force.x >= 0.005f && spriteRenderer.flipX != false)
+                spriteRenderer.flipX = false;
+            else if (force.x <= .005f && spriteRenderer.flipX != true)
+                spriteRenderer.flipX = true;
+        }
+
     }
 
     void CalculatePath()
@@ -119,8 +134,24 @@ public class EnemyAI : MonoBehaviour
     {
         int damage = Random.Range(minDamage, maxDamage);
         PlayerHealth.TakeDam(damage);
-        //
+        // Show Effect
         PlayerHealth.GetComponent<Player>().TakeDamageEffect(damage);
   
+    }
+
+    public void ChangeEnemySprite(string spriteName)
+    {
+        // Check if the sprite exists in the Sprite Atlas
+        Sprite sprite = enemySpriteAtlas.GetSprite(spriteName);
+
+        if (sprite != null && spriteRenderer)
+        {
+            // Change the sprite
+            spriteRenderer.sprite = sprite;
+        }
+        else
+        {
+            Debug.LogWarning("Sprite not found in the Sprite Atlas: " + spriteName);
+        }
     }
 }

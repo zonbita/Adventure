@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae9284f11f98ba64a81bbb0d01efd61e, type: 3}
+  m_Name: Rocket_Homing
+  m_EditorClassIdentifier: 
+  itemType: 5
+  itemId: 0
+  itemName: <color=silver>Rocket_Homing</color>
+  itemDesc: 'Homing target Enemy
+
+'
+  itemIcon: {fileID: 21300000, guid: 9387fbd21bbc6054e9f4a30a94e442df, type: 3}
+  baseDamage: 30
+  baseCount: 1
+  damages:
+  - 1
+  - 1
+  - 2
+  - 3
+  - 3
+  - 4
+  - 4
+  - 4
+  - 5
+  - 5
+  counts: 01000000010000000000000001000000000000000100000000000000010000000000000001000000
+  projectile: {fileID: 4958635224038126758, guid: 1e3bdf4086686324eb893e740d7eaf35, type: 3}

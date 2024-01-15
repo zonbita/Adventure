@@ -107,13 +107,13 @@ public class WeaponManager : MonoBehaviour
 
         return Enemies[0];
     }
-    public Transform FindNearestEnemy(Vector2 weaponPos)
+    public Transform FindNearestEnemy(Vector2 p)
     {
         if (Enemies != null && Enemies.Count <= 0) return null;
         Transform nearestEnemy = Enemies[0];
         foreach (Transform enemy in Enemies)
         {
-            if (Vector2.Distance(enemy.position, weaponPos) < Vector2.Distance(nearestEnemy.position, weaponPos))
+            if (Vector2.Distance(enemy.position, p) < Vector2.Distance(nearestEnemy.position, p))
                 nearestEnemy = enemy;
         }
 

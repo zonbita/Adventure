@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class Bullet_Homing : Bullet
 {
-    public Transform target;
+    Transform target;
     public float rotateSpeed = 200f;
     public float speed = 5f;
+
+    public virtual void Init(int minDamage, int maxDamage, Transform Target)
+    {
+        this.minDamage = minDamage;
+        this.maxDamage = maxDamage;
+        this.target = Target;
+    }
 
     private void Awake()
     {
@@ -20,22 +27,31 @@ public class Bullet_Homing : Bullet
 
     void FixedUpdate()
     {
-        Vector2 direction = (Vector2)target.position - rb.position;
+        if(target != null)
+        {
+            Vector2 direction = (Vector2)target.position - rb.position;
 
-        direction.Normalize();
+            direction.Normalize();
 
-        float rotateAmount = Vector3.Cross(direction, transform.up).z;
+            float rotateAmount = Vector3.Cross(direction, transform.up).z;
 
-        rb.angularVelocity = -rotateAmount * rotateSpeed;
+            rb.angularVelocity = -rotateAmount * rotateSpeed;
 
-        rb.velocity = transform.up * speed;
+            rb.velocity = transform.up * speed;
+        }
+        else
+        {
+            target = WeaponManager.instance.FindNearestEnemy(this.transform.position);
+        }
+
     }
 
-    void OnTriggerEnter2D(Collider2D c)
+/*    void OnTriggerEnter2D(Collider2D c)
     {
-        if (c.CompareTag("Player"))
-            c.gameObject.SetActive(false);
-    }
+        if (c.CompareTag("Enemy"))
+        { 
+        }
+    }*/
 
 
 }

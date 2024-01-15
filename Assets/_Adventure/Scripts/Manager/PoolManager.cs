@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
-public class PoolManager : MonoBehaviour
+public class PoolManager : Singleton<PoolManager>
 {
     public GameObject[] prefabs;
 
@@ -52,5 +54,33 @@ public class PoolManager : MonoBehaviour
         }
         print("Please, Add at Pool Manager");
         return -1;
+    }
+
+    public void SpawnWait(int prefabId, int max)
+    {
+        int i = 0;
+        int j = pools[prefabId].Count;
+        while (j < max)
+        {
+            GameObject go = Instantiate(prefabs[prefabId], transform);
+            go.SetActive(false);
+            pools[prefabId].Add(go);
+
+            j++;
+        }
+    }
+
+    public Transform GetGameobjectDeactive(int index)
+    {
+        if (pools[index].Count != 0)
+        {
+            foreach (GameObject item in pools[index])
+            {
+                if(!item.activeSelf)
+                    return item.transform;
+            }
+        }
+        print("Please, Add at Pool Manager");
+        return null;
     }
 }

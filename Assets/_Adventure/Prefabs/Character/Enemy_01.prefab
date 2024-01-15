@@ -80,11 +80,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 965158b942f35447494adc1eb3f73c77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemySpriteAtlas: {fileID: 4343727234628468602, guid: 4fe0e20adc21fa14cae4922f95ede83c, type: 2}
+  enemyName: Jelly 0
   target: {fileID: 0}
   moveSpeed: 1.5
   nextWayPointDistance: 1
   repeatTimeUpdatePath: 4
-  characterSR: {fileID: 4398302326340471489}
   minDamage: 2
   maxDamage: 4
   freezeDurationTime: 0.4
@@ -334,7 +335,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 20.48, y: 20.48}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

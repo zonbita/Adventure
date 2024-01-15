@@ -3,15 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class Weapon : MonoBehaviour
 {
     [Header("# Game Object")]
-    public GameObject projectile;
+    GameObject projectile;
     public ItemData data;
 
     [Header("# Value")]
-    private float timer;
     public float WeaponRate = 0.4f;
     public float WeaponRateWait = 0.1f;
     public float bulletForce = 9;
@@ -23,6 +24,7 @@ public class Weapon : MonoBehaviour
     public int level=0;
     int DamageTotal = 1;
     float Radius = 1.5f;
+    private float timer;
 
     private void UplevelWeapon(string s)
     {
@@ -59,6 +61,9 @@ public class Weapon : MonoBehaviour
             case ItemData.ItemType.Rotator:
                 InitRotator();
                 break;
+            case ItemData.ItemType.Homing:
+                PoolManager.Instance.SpawnWait(prefabId, count);
+                break;
             default:
 
                 break;
@@ -81,7 +86,18 @@ public class Weapon : MonoBehaviour
                     StartCoroutine("SpawnBulletMulDirection");
                 }
                 break;
-
+            case ItemData.ItemType.Homing:
+                timer += Time.deltaTime;
+                if (timer > WeaponRate)
+                {
+                    timer = 0f;
+                    Transform enemy = WeaponManager.instance?.FindNearestEnemy(this.gameObject.transform.position);
+                    if (enemy != null)
+                    {
+                        StartCoroutine("SpawnBulletHoming", enemy);
+                    }
+                }
+                break;
             default:
                 timer += Time.deltaTime;
                 if (timer > WeaponRate)
@@ -144,10 +160,25 @@ public class Weapon : MonoBehaviour
         float s = WeaponRate / count;
         for (int index = 0; index < count; index++)
         {
-            Transform bullet = GameManager.Instance.pool.Get(prefabId).transform;
+            Transform bullet = PoolManager.Instance.Get(prefabId).transform;
             bullet.position = transform.position;
             bullet.GetComponent<Bullet>()?.Init(DamageTotal+ minDamage, DamageTotal+ maxDamage, transform.right * bulletForce);
 
+            yield return new WaitForSeconds(s);
+        }
+    }
+
+    IEnumerator SpawnBulletHoming(Transform enemy)
+    {
+        float s = WeaponRate / count;
+        for (int index = 0; index < count; index++)
+        {
+            Transform bullet = PoolManager.Instance.Get(prefabId).transform;
+            if (bullet != null)
+            {
+                bullet.position = transform.position;
+                bullet.GetComponent<Bullet_Homing>()?.Init(DamageTotal + minDamage, DamageTotal + maxDamage, enemy);
+            }
             yield return new WaitForSeconds(s);
         }
     }
@@ -156,7 +187,7 @@ public class Weapon : MonoBehaviour
     {
         for (int index = 0; index < count; index++)
         {
-            Transform bullet = GameManager.Instance.pool.Get(prefabId).transform;
+            Transform bullet = PoolManager.Instance.Get(prefabId).transform;
             bullet.position = transform.position;
 
             // Calculate rotation
