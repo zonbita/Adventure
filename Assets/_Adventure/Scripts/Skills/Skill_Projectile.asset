@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b70f8e66db9a79f43bf9f8eadac4d4f2, type: 3}
   m_Name: Skill_Projectile
   m_EditorClassIdentifier: 
-  bossSkill: 1
+  SkillType: 1
+  Stage: 0
   GO_Skill: {fileID: 0}
+  cooldownTime: 1
+  activeTime: 1
   minDamage: 6
   maxDamage: 16

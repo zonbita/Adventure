@@ -1,14 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using System.Text;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PoolManager : Singleton<PoolManager>
 {
     public GameObject[] prefabs;
 
-    public List<GameObject>[] pools;
+    [SerializeField] List<GameObject>[] pools;
 
     void Awake()
     {
@@ -45,6 +48,8 @@ public class PoolManager : Singleton<PoolManager>
 
     public int GetID(GameObject go)
     {
+        int id = -1;
+  
         for (int index = 0; index < prefabs.Length; index++)
         {
             if (go == prefabs[index])
@@ -52,21 +57,21 @@ public class PoolManager : Singleton<PoolManager>
                 return index;
             }
         }
-        print("Please, Add at Pool Manager");
-        return -1;
+
+
+
+        Debug.LogWarning("Please add prefab " + go + "to pooling");
+
+        return id;
     }
 
     public void SpawnWait(int prefabId, int max)
     {
-        int i = 0;
-        int j = pools[prefabId].Count;
-        while (j < max)
+        int m = pools[prefabId].Count;
+        while (m < max)
         {
-            GameObject go = Instantiate(prefabs[prefabId], transform);
-            go.SetActive(false);
-            pools[prefabId].Add(go);
-
-            j++;
+            pools[prefabId].Add(CreateGobject(prefabs[prefabId]));
+            m++;
         }
     }
 
@@ -82,5 +87,11 @@ public class PoolManager : Singleton<PoolManager>
         }
         print("Please, Add at Pool Manager");
         return null;
+    }
+    GameObject CreateGobject(GameObject item)
+    {
+        GameObject gobject = Instantiate(item, transform);
+        gobject.SetActive(false);
+        return gobject;
     }
 }

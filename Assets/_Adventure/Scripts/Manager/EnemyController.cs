@@ -6,14 +6,11 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-
-    Health health;
     ColoredFlash flash;
     EnemyAI enemyAI;
 
     private void Start()
     {
-        health = GetComponent<Health>();
         flash = GetComponent<ColoredFlash>();
         enemyAI = GetComponent<EnemyAI>();
     }

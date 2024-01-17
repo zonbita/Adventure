@@ -1,13 +1,14 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!687078895 &4343727234628468602
-SpriteAtlas:
+--- !u!612988286 &1
+SpriteAtlasAsset:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SpriteAtlas_Assets_Gem
-  m_EditorData:
+  m_Name: 
+  m_MasterAtlas: {fileID: 0}
+  m_ImporterData:
     serializedVersion: 2
     textureSettings:
       serializedVersion: 2
@@ -56,31 +57,6 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 9284f74d651e54610920d6b7680f228b, type: 3}
     - {fileID: 2800000, guid: c27148fcc9ef7428ead2778dbf31a9d2, type: 3}
     bindAsDefault: 1
-    isAtlasV2: 0
+    isAtlasV2: 1
     cachedData: {fileID: 0}
-  m_MasterAtlas: {fileID: 0}
-  m_PackedSprites:
-  - {fileID: 21300000, guid: 3d25e3540ef2540b781c8cd914a95397, type: 3}
-  - {fileID: 21300000, guid: 776193d58955a4bf397f92baa08f4151, type: 3}
-  - {fileID: 21300000, guid: 4bf5ded5cf8b841b085dd843115310ec, type: 3}
-  - {fileID: 21300000, guid: a7c7b4870fc8a4ce690390a9ae6cdd6c, type: 3}
-  - {fileID: 21300000, guid: 7e014759b47794e55b8a8ec42ab79f18, type: 3}
-  - {fileID: 21300000, guid: 4aed2269993084dda83f30f420dae746, type: 3}
-  - {fileID: 21300000, guid: d90e197bcaf0147c9866a54a84327f25, type: 3}
-  - {fileID: 21300000, guid: c27148fcc9ef7428ead2778dbf31a9d2, type: 3}
-  - {fileID: 21300000, guid: 9284f74d651e54610920d6b7680f228b, type: 3}
-  - {fileID: 21300000, guid: a70a206f073274fb4a0b7e0c12ce8f36, type: 3}
-  m_PackedSpriteNamesToIndex:
-  - LesserArcane
-  - LesserAccuracy
-  - LesserResistance
-  - LesserHealth
-  - LesserPrayer
-  - LesserPower
-  - LesserMana
-  - LesserQuickness
-  - LesserProtector
-  - LesserSharpness
-  m_RenderDataMap: {}
-  m_Tag: SpriteAtlas_Assets_Gem
   m_IsVariant: 0

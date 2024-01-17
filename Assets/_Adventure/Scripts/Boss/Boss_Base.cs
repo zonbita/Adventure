@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+
 public class Boss_Base : MonoBehaviour
 {
     public Boss_Data_SO Boss_Data_SO;
@@ -9,6 +10,9 @@ public class Boss_Base : MonoBehaviour
     public float repeatTimeUpdatePath = 0.5f;
     public float nextWayPointDistance = 3f;
     public bool Roaming = false;
+
+    public int minDamage = 2;
+    public int maxDamage = 5;
 
     [SerializeReference] Transform target;
 
@@ -19,31 +23,34 @@ public class Boss_Base : MonoBehaviour
     Coroutine moveCoroutine;
     Rigidbody2D rb;
     SpriteRenderer sr;
+    float distance;
+    bool StopMove = false;
 
     private void Awake()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
         health = GetComponent<Health>();
-        health.maxHealth = Boss_Data_SO.maxHealth;
-
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         target = FindObjectOfType<Player>().transform;
+
+        // Drop XP
+        health.XP = 6;
+
+        if (Boss_Data_SO)
+        {
+            health.maxHealth = Boss_Data_SO.maxHealth;
+        }
     }
-
-    private void FixedUpdate()
-    {
-
-    }
-
     void Start()
     {
         InvokeRepeating("CalculatePath", 0f, repeatTimeUpdatePath);
+        InvokeRepeating("ChangeFace", 0f, 0.3f);
     }
 
     void CalculatePath()
     {
-        if (seeker.IsDone())
+        if (seeker.IsDone() && !StopMove)
             seeker.StartPath(rb.position, target.position, OnPathCompleted);
     }
 
@@ -61,7 +68,24 @@ public class Boss_Base : MonoBehaviour
         if (moveCoroutine != null) StopCoroutine(moveCoroutine);
         moveCoroutine = StartCoroutine(MoveToTargetCoroutine());
     }
+    void StopMovement()
+    {
+        if (moveCoroutine != null) StopCoroutine(moveCoroutine);
+        StopMove = true;
+    }
 
+    void EnableMovement()
+    {
+        StopMove = false;
+    }
+
+    void ChangeFace()
+    {
+        if (force.x >= 0.01f)
+            sr.flipX = false;
+        else if (force.x <= .01f)
+            sr.flipX = true;
+    }
     IEnumerator MoveToTargetCoroutine()
     {
         int currentWP = 0;
@@ -76,11 +100,6 @@ public class Boss_Base : MonoBehaviour
             float distance = Vector2.Distance(rb.position, path.vectorPath[currentWP]);
             if (distance < nextWayPointDistance)
                 currentWP++;
-
-            if (force.x >= 0.01f)
-                sr.flipX =  false;
-            else if(force.x <= .01f)
-                sr.flipX = true;
 
             yield return null;
         }
@@ -103,5 +122,12 @@ public class Boss_Base : MonoBehaviour
         }
 
     }
+    void DamagePlayer()
+    {
+        int damage = Random.Range(minDamage, maxDamage);
+        health.TakeDam(damage);
+        // Show Effect
+        health.GetComponent<Player>().TakeDamageEffect(damage);
 
+    }
 }

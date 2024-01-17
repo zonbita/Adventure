@@ -1,34 +1,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BossSkill { Teleport, Projectile, RocketHomming };
-
+public enum SkillType { Teleport, Projectile, RocketHomming };
+public enum SkillStage {ready, active, cooldown };
 
 [System.Serializable]
 public class Skill_Data
 {
-    public BossSkill bossSkill;
+    public SkillType SkillType;
+    public SkillStage Stage;
+    public string SkillName;
     public GameObject GO_Skill;
-    public int minDamage = 6;
-    public int maxDamage = 16;
+    public float cooldownTime = 1;
+    public float activeTime = 1;
+    public int Damage = 6;
+    public float currenCooldownTime = 0;
 }
 
 [CreateAssetMenu(fileName = "New Skill Data", menuName = "Skill Data", order = 1)]
 public class Skill_Data_SO : ScriptableObject
 {
-    public BossSkill bossSkill;
+    public SkillType SkillType;
+    public SkillStage Stage;
+    public string SkillName;
     public GameObject GO_Skill;
-    public int minDamage = 6;
-    public int maxDamage = 16;
+    public float cooldownTime = 1;
+    public float activeTime = 1;
+    public int Damage = 6;
 
     public Skill_Data GetDataInstance()
     {
         return new Skill_Data()
         {
-            bossSkill = this.bossSkill,
+            SkillType = this.SkillType,
+            Stage = this.Stage,
+            SkillName = this.SkillName,
             GO_Skill = this.GO_Skill,
-            minDamage = this.minDamage,
-            maxDamage = this.maxDamage
+            cooldownTime = this.cooldownTime,
+            activeTime = this.activeTime,
+            Damage = this.Damage,
         };
     }
+
 }

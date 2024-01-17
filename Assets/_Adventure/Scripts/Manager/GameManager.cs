@@ -1,16 +1,9 @@
-using DG.Tweening;
-using Newtonsoft.Json;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using System.Threading.Tasks;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System;
-using System.Linq;
-using UnityEngine.Networking.Types;
-
+using UnityEngine.Pool;
 public enum Phase{
     Home,
     Start,
@@ -29,9 +22,8 @@ public class GameManager : Singleton<GameManager>
 
     void Awake()
     {
-        Application.targetFrameRate = 60;
+        //Application.targetFrameRate = 60;
     }
-
 
     public List<TextMeshProUGUI> totalCoinTMP;
 

@@ -18,7 +18,7 @@ public class ExpManager : Singleton<ExpManager>
         XPList = new int[names.Length];
         for (int i = 0; i < XPList.Length; i++)
         {
-            XPList[i] = 1+i;
+            XPList[i] = 1 + i;
         }
     }
     public Sprite GetSprite(int xp)

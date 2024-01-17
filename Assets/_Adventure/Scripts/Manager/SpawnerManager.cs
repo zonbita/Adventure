@@ -4,28 +4,60 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class SpawnerManager : MonoBehaviour
+[Serializable]
+public class SerializableBossLevel
 {
-    public static SpawnerManager instance;
+    public int Level;
+    public Boss_Base Boss_Object;
+}
 
-    public float startTimeBtwSpawn;
-    private float timeBtwSpawn = 2;
+public class SpawnerManager : Singleton<SpawnerManager>
+{
+    public Action<int, Boss_Base> boss;
 
+    [SerializeField] private List<SerializableBossLevel> BossList = new List<SerializableBossLevel>();
+    private Dictionary<int, Boss_Base> _BossList;
+
+    [Header("Options")]
     public WeaponManager _weaponManager;
+    public int maxEnemy = 5;
+    public float startTimeBtwSpawn;
+
+    private float timeBtwSpawn = 2;
+    private Player player;
+    int roundCount = 0;
     List<Spawner> _SpawnPoints;
 
-
-    private Player player;
-    public int maxEnemy = 5;
-    int roundCount = 0;
-
-
-    private void Awake() => instance = this;
+    void Awake()
+    {
+        // Init
+        _BossList = new Dictionary<int, Boss_Base>();
+        foreach (var v in BossList)
+        {
+            _BossList[v.Level] = v.Boss_Object;
+        }
+    }
 
     private void Start()
     {
         player = FindObjectOfType<Player>();
         _SpawnPoints = new List<Spawner>(GetComponentsInChildren<Spawner>());
+        GameManager.Instance.UpLevel += UpLevel;
+    }
+
+    private void UpLevel()
+    {
+        int level = GameManager.Instance.Level;
+        if (_BossList.ContainsKey(level))
+        {
+            SpawnBoss(level);
+        }
+    }
+
+    public void SpawnBoss(int level)
+    {
+        GameObject go = Instantiate(_BossList[level], _SpawnPoints[UnityEngine.Random.Range(0, _SpawnPoints.Count())].transform.position, Quaternion.identity).gameObject;
+        WeaponManager.instance.AddEnemyToFireRange(go.transform);
     }
 
     public List<int> GetRandomIndices(int n, int k)

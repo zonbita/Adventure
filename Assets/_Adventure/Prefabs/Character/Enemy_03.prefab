@@ -164,12 +164,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 965158b942f35447494adc1eb3f73c77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpriteAtlas: {fileID: 4343727234628468602, guid: 4fe0e20adc21fa14cae4922f95ede83c, type: 2}
+  enemySpriteAtlas: {fileID: 100100200, guid: a9b5e10a16c28b7439c56bf3a0efbea3, type: 3}
   enemyName: Jelly 5
-  target: {fileID: 0}
-  moveSpeed: 1
-  nextWayPointDistance: 1
-  repeatTimeUpdatePath: 4
+  moveSpeed: 2
+  nextWayPointDistance: 0.5
+  repeatTimeUpdatePath: 2
   minDamage: 2
   maxDamage: 4
   freezeDurationTime: 0

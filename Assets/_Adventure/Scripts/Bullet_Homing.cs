@@ -13,9 +13,14 @@ public class Bullet_Homing : Bullet
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
         this.target = Target;
+
+        if (target.CompareTag("Player"))
+        {
+            TargetPlayer = true;
+        }
     }
 
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
     }
@@ -41,17 +46,12 @@ public class Bullet_Homing : Bullet
         }
         else
         {
-            target = WeaponManager.instance.FindNearestEnemy(this.transform.position);
+            if (TargetPlayer) 
+                target = GameManager.Instance.Player.transform;
+            else
+                target = WeaponManager.instance.FindNearestEnemy(this.transform.position);
         }
 
     }
-
-/*    void OnTriggerEnter2D(Collider2D c)
-    {
-        if (c.CompareTag("Enemy"))
-        { 
-        }
-    }*/
-
 
 }

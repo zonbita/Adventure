@@ -2,10 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class ItemSpawner : MonoBehaviour
+public class ItemSpawner : Singleton<ItemSpawner>
 {
-    public static ItemSpawner instance;
-    public bool bDebug = false, spawned = false;
+    public List<SpawnableItem> spawnableItems;
+    public bool bDebug = false;
+    public bool spawned = false;
+    
+    public float SpawningTime = 30f;
+
     [Serializable]
     public class SpawnableItem
     {
@@ -13,20 +17,12 @@ public class ItemSpawner : MonoBehaviour
         public float spawnChance;
     }
 
-    public List<SpawnableItem> spawnableItems;
-    public float SpawningTime = 30f;
-
-    private void Awake()
-    {
-        instance = this;
-    }
-
     void Start()
     {
-        InvokeRepeating("Reset", SpawningTime, SpawningTime); 
+        InvokeRepeating("_Reset", SpawningTime, SpawningTime); 
     }
 
-    void Reset()
+    public void _Reset()
     {
         spawned = true;
     }

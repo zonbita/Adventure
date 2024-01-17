@@ -9,9 +9,11 @@ public class Bullet : MonoBehaviour
     protected int minDamage = 6;
     protected int maxDamage = 16;
     public bool IsBullet = true;
+    protected bool TargetPlayer = false;
+
     protected Rigidbody2D rb;
 
-    public virtual void Awake()
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
@@ -39,15 +41,31 @@ public class Bullet : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (TargetPlayer)
         {
-                
+            if (collision.CompareTag("Player"))
+            {
+
                 int damage = Random.Range(minDamage, maxDamage);
                 collision.GetComponent<Health>().TakeDam(damage);
                 collision.GetComponent<EnemyController>()?.TakeDamEffect(damage);
                 gameObject.SetActive(IsBullet ? false : true);
 
+            }
         }
+        else
+        {
+            if (collision.CompareTag("Enemy"))
+            {
+
+                int damage = Random.Range(minDamage, maxDamage);
+                collision.GetComponent<Health>().TakeDam(damage);
+                collision.GetComponent<EnemyController>()?.TakeDamEffect(damage);
+                gameObject.SetActive(IsBullet ? false : true);
+
+            }
+        }
+
     }
 
 }

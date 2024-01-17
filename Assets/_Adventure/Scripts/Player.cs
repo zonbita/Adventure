@@ -5,23 +5,14 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     Controls controls;
-
+    [Header("Options")]
     public float moveSpeed = 5f;
-
     public Rigidbody2D rb;
     public SpriteRenderer characterSR;
     public Health health;
     Animator animator;
 
-    public float dashBoost = 2f;
-    private float dashTime;
-    public float DashTime;
-    private bool once;
- 
-
     public Vector3 moveInput;
-
-    
     public GameObject HealthBar;
     public Vector3 HealthBarOffset = new Vector3(0f, -15.42f, 0f);
     Collider2D coll;
@@ -80,25 +71,6 @@ public class Player : MonoBehaviour
         else
              animator.SetBool("isWalk", false);
         
-
-        if (Input.GetKeyDown(KeyCode.Space) && dashTime <= 0)
-        {
-            //animator.SetBool("Roll", true);
-            moveSpeed += dashBoost;
-            dashTime = DashTime;
-            once = true;
-        }
-
-        if (dashTime <= 0 && once)
-        {
-            animator.SetBool("Roll", false);
-            moveSpeed -= dashBoost;
-            once = false;
-        }
-        else
-        {
-            dashTime -= Time.deltaTime;
-        }
 
         // Rotate Face
         if (moveInput.x != 0)
