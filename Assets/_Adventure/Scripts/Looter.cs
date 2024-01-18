@@ -5,12 +5,19 @@ using UnityEngine;
 
 public class Looter : MonoBehaviour
 {
+    [SerializeField] private CircleCollider2D circleCollider;
+
+    public void SetLooterRadius(float size)
+    {
+        circleCollider.radius = size;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Coin"))
         {
             collision.gameObject.GetComponent<Follow>().Reset();
-            AudioManager.instance?.PlaySfx(AudioManager.Sfx.Loot);
+            AudioManager.instance?.PlaySfx(AudioManager.Sfx.LootCoin);
         }
 
         if (collision.CompareTag("Item"))

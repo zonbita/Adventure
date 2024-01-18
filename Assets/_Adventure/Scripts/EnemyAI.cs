@@ -44,18 +44,16 @@ public class EnemyAI : MonoBehaviour
         target = FindObjectOfType<Player>().transform;
 
         InvokeRepeating("CalculatePath", 0f, repeatTimeUpdatePath);
+        InvokeRepeating("ChangeFace", 0f, 0.1f);
     }
 
-    private void FixedUpdate()
+    void ChangeFace()
     {
-        if (spriteRenderer)
-        {
-            if (force.x >= 0.005f && spriteRenderer.flipX != false)
-                spriteRenderer.flipX = false;
-            else if (force.x <= .005f && spriteRenderer.flipX != true)
-                spriteRenderer.flipX = true;
-        }
 
+        if (force.x >= 0.001f)
+            spriteRenderer.flipX = false;
+        else if (force.x <= .001f)
+            spriteRenderer.flipX = true;
     }
 
     void CalculatePath()
@@ -133,9 +131,9 @@ public class EnemyAI : MonoBehaviour
     void DamagePlayer()
     {
         int damage = Random.Range(minDamage, maxDamage);
-        PlayerHealth.TakeDam(damage);
+        PlayerHealth.GetComponent<I_Damage>().TakeDamage(damage);
         // Show Effect
-        PlayerHealth.GetComponent<Player>().TakeDamageEffect(damage);
+        PlayerHealth.GetComponent<I_Damage>().TakeDamageEffect(damage, maxDamage);
   
     }
 

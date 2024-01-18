@@ -65,6 +65,34 @@ public class PoolManager : Singleton<PoolManager>
         return id;
     }
 
+    public GameObject GetObject(GameObject go)
+    {
+        int index = GetID(go);
+        if (index != -1)
+        {
+            GameObject select = null;
+
+            foreach (GameObject item in pools[index])
+            {
+                if (!item.activeSelf)
+                {
+                    select = item;
+                    select.SetActive(true);
+                    break;
+                }
+            }
+
+            if (!select)
+            {
+                select = Instantiate(prefabs[index], transform);
+                pools[index].Add(select);
+            }
+
+            return select;
+        }
+        return null;
+    }
+
     public void SpawnWait(int prefabId, int max)
     {
         int m = pools[prefabId].Count;

@@ -24,7 +24,18 @@ public class Bullet : MonoBehaviour
         this.maxDamage = maxDamage;
     }
 
+    public virtual void Init(int Damage, bool TargetPlayer)
+    {
+        this.minDamage = this.maxDamage = Damage;
+        this.TargetPlayer = TargetPlayer;
+    }
 
+    public virtual void Init(int Damage, bool TargetPlayer, Vector2 bulletForce)
+    {
+        this.minDamage = this.maxDamage = Damage;
+        this.TargetPlayer = TargetPlayer;
+        rb.AddForce(bulletForce, ForceMode2D.Impulse);
+    }
 
     public virtual void Init(int minDamage, int maxDamage, Vector2 bulletForce)
     {
@@ -47,8 +58,13 @@ public class Bullet : MonoBehaviour
             {
 
                 int damage = Random.Range(minDamage, maxDamage);
-                collision.GetComponent<Health>().TakeDam(damage);
-                collision.GetComponent<EnemyController>()?.TakeDamEffect(damage);
+                I_Damage[] dmg = collision.GetComponents<I_Damage>();
+                foreach (I_Damage i in dmg)
+                {
+                    i.TakeDamage(damage);
+                    i.TakeDamageEffect(damage, maxDamage);
+                }
+
                 gameObject.SetActive(IsBullet ? false : true);
 
             }
@@ -59,8 +75,12 @@ public class Bullet : MonoBehaviour
             {
 
                 int damage = Random.Range(minDamage, maxDamage);
-                collision.GetComponent<Health>().TakeDam(damage);
-                collision.GetComponent<EnemyController>()?.TakeDamEffect(damage);
+                I_Damage[] dmg = collision.GetComponents<I_Damage>();
+                foreach (I_Damage i in dmg)
+                {
+                    i.TakeDamage(damage);
+                    i.TakeDamageEffect(damage, maxDamage);
+                }
                 gameObject.SetActive(IsBullet ? false : true);
 
             }

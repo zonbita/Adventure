@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b70f8e66db9a79f43bf9f8eadac4d4f2, type: 3}
-  m_Name: Skill_Projectile
+  m_Name: Skill_ShootMultiDirection
   m_EditorClassIdentifier: 
   SkillType: 1
   Stage: 0
-  SkillName: Projectile
-  GO_Skill: {fileID: 8488780647853429835, guid: f450077b3041cac4d82007ac7e4d0ac8, type: 3}
+  SkillName: ShootMultiDirection
+  GO_Skill: {fileID: 8488780647853429835, guid: f8a0ece0ca3b4eb4184f78c813344197, type: 3}
   cooldownTime: 1
   activeTime: 1
   Damage: 6
-  Number: 1
+  Number: 3

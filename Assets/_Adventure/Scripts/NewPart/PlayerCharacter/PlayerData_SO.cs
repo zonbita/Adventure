@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Character", menuName = "Character/CharacterData")]
@@ -6,10 +7,8 @@ public class PlayerData_SO : ScriptableObject
     public int id;
     public string playerName;
     public Sprite SpriteCharacter;
-    public int currentHealth;
-    public int maxHealth;
     public int price;
-
+    public List<Stat> Stats;
     public PlayerData GetDataInstance()
     {
         return new PlayerData()
@@ -17,9 +16,8 @@ public class PlayerData_SO : ScriptableObject
             id = this.id,
             playerName = this.playerName,
             SpriteCharacter = this.SpriteCharacter,
-            maxHealth = this.maxHealth,
-            currentHealth = this.currentHealth,
             price = this.price,
+            Stats = this.Stats
         };
     }
 

@@ -45,10 +45,10 @@ public class Button_buy : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void OnPointerClick(PointerEventData eventData)
     {
         AudioManager.instance?.PlaySfx(AudioManager.Sfx.Confirm);
-        if(GameManager.Instance.TotalCoin > playerData.price)
+        if(GameManager.Instance.TotalCoin >= playerData.price)
         {
             GameManager.Instance.TotalCoin -= playerData.price;
-            GameManager.Instance.Player.ChangeSprite(playerData.SpriteCharacter);
+            GameManager.Instance.Player.Init(playerData.Stats, playerData.SpriteCharacter);
             GameManager.Instance.CloseWindow(2);
         }
     }

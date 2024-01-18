@@ -15,6 +15,14 @@ MonoBehaviour:
   id: 0
   playerName: Jelly Sushi
   SpriteCharacter: {fileID: 21300000, guid: d78e009f5bb799b42bbf3c801af824ac, type: 3}
-  currentHealth: 0
-  maxHealth: 0
-  price: 100
+  price: 10
+  Stats:
+  - _StatName: 0
+    _StatType: 1
+    _StatValue: 150
+  - _StatName: 3
+    _StatType: 1
+    _StatValue: 3.5
+  - _StatName: 7
+    _StatType: 1
+    _StatValue: 3

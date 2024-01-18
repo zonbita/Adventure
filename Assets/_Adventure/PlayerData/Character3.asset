@@ -15,6 +15,14 @@ MonoBehaviour:
   id: 0
   playerName: Jelly Snack
   SpriteCharacter: {fileID: 21300000, guid: 7fd151f4d9de8de47a1d5abe6e506e83, type: 3}
-  currentHealth: 0
-  maxHealth: 0
-  price: 200
+  price: 20
+  Stats:
+  - _StatName: 0
+    _StatType: 1
+    _StatValue: 170
+  - _StatName: 3
+    _StatType: 1
+    _StatValue: 4
+  - _StatName: 7
+    _StatType: 1
+    _StatValue: 4

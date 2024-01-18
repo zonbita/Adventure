@@ -37,7 +37,43 @@ public class UISelectCharacterPanel : MonoBehaviour
             Buttons.Add(go);
             TextMeshProUGUI[] T = go.transform.GetChild(0).GetComponentsInChildren<TextMeshProUGUI>();
             go.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = data.SpriteCharacter;
-            SetText(T, data.price.ToString(), data.playerName);
+
+            string info = "<color=#356070><b>" + data.playerName + "</b></color>\n";
+            foreach(Stat s in data.Stats)
+            {
+                string a;
+
+                switch (s._StatName)
+                {
+                    case StatName.BaseDamage:
+                        a = "red> Base Damage:" + s._StatValue;
+                        break;
+                    case StatName.Speed:
+                        a = "blue> Speed: " + s._StatValue;
+                        break;
+                    case StatName.Mana:
+                        a = "pink> Mana: " + s._StatValue;
+                        break;
+                    case StatName.LootRadius:
+                        a = "#ffa500ff> Loot Radius: " + s._StatValue;
+                        break;
+                    case StatName.HP: 
+                        a = "#113000> Health: " + s._StatValue;
+                        break;
+                    case StatName.Luck:
+                        a = "#800080ff> Luck x" + s._StatValue;
+                        break;
+                    case StatName.Regen:
+                        a = "#008080ff> Regen " + s._StatValue + " HP 1/S";
+                        break;
+                    default:
+                        a = "#140322> " + s._StatName+ ":";
+                        break;
+                }
+                
+                info = info +"\n<color=" + a + "</color>";
+            }
+            SetText(T, data.price.ToString(), info);
         }
     }
 
@@ -75,7 +111,7 @@ public class UISelectCharacterPanel : MonoBehaviour
 
         if (index < playerDatas.Count && playerDatas[index] != null)
         {
-            Text[0].text = playerDatas[index].maxHealth.ToString();
+            //Text[0].text = playerDatas[index].maxHealth.ToString();
             Text[1].text = playerDatas[index].SpriteCharacter.ToString();
             Text[2].text = playerDatas[index].playerName;
         }

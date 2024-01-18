@@ -14,7 +14,7 @@ public class Boss_Base : MonoBehaviour
     public int minDamage = 2;
     public int maxDamage = 5;
 
-    [SerializeReference] Transform target;
+    [HideInInspector] Transform target;
 
     Vector2 force;
     Health health;
@@ -26,7 +26,7 @@ public class Boss_Base : MonoBehaviour
     float distance;
     bool StopMove = false;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
         health = GetComponent<Health>();
@@ -42,10 +42,10 @@ public class Boss_Base : MonoBehaviour
             health.maxHealth = Boss_Data_SO.maxHealth;
         }
     }
-    void Start()
+    protected virtual void Start()
     {
         InvokeRepeating("CalculatePath", 0f, repeatTimeUpdatePath);
-        InvokeRepeating("ChangeFace", 0f, 0.3f);
+        InvokeRepeating("ChangeFace", 0f, 0.2f);
     }
 
     void CalculatePath()
@@ -68,22 +68,23 @@ public class Boss_Base : MonoBehaviour
         if (moveCoroutine != null) StopCoroutine(moveCoroutine);
         moveCoroutine = StartCoroutine(MoveToTargetCoroutine());
     }
-    void StopMovement()
+    public void StopMovement()
     {
         if (moveCoroutine != null) StopCoroutine(moveCoroutine);
         StopMove = true;
     }
 
-    void EnableMovement()
+    public void EnableMovement()
     {
         StopMove = false;
     }
 
     void ChangeFace()
     {
-        if (force.x >= 0.01f)
+        
+        if (force.x >= 0.001f)
             sr.flipX = false;
-        else if (force.x <= .01f)
+        else if (force.x <= .001f)
             sr.flipX = true;
     }
     IEnumerator MoveToTargetCoroutine()
@@ -100,7 +101,6 @@ public class Boss_Base : MonoBehaviour
             float distance = Vector2.Distance(rb.position, path.vectorPath[currentWP]);
             if (distance < nextWayPointDistance)
                 currentWP++;
-
             yield return null;
         }
     }
@@ -125,9 +125,8 @@ public class Boss_Base : MonoBehaviour
     void DamagePlayer()
     {
         int damage = Random.Range(minDamage, maxDamage);
-        health.TakeDam(damage);
-        // Show Effect
-        health.GetComponent<Player>().TakeDamageEffect(damage);
+
+        health.GetComponent<Player>()?.TakeDamageEffect(damage);
 
     }
 }

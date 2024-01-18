@@ -61,10 +61,11 @@ public class GameManager : Singleton<GameManager>
     // Coin
     private int totalCoin = 0;
     [SerializeField] private int ReviveCoin = 2;
+    public int CoinLuck = 1;
 
     // Prefab ID
     [HideInInspector] public int CoinID = -1;
-    [SerializeField] public int ExpID = -1;
+    [HideInInspector] public int ExpID = -1;
     [HideInInspector] public int DeathEffectID = -1;
     [HideInInspector] public int PopupID = -1;
 

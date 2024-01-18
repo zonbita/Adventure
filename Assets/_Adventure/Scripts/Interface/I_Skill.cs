@@ -5,6 +5,9 @@ using UnityEngine;
 public interface I_Skill
 {
     void Active(string SkillName);
+    void Active(string SkillName, Vector3 location);
+
     void Deactive(string SkillName);
-    void Update();
+
+    void Reset(string SkillName);
 }

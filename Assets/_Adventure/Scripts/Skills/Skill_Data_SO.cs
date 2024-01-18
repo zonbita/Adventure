@@ -14,7 +14,8 @@ public class Skill_Data
     public float cooldownTime = 1;
     public float activeTime = 1;
     public int Damage = 6;
-    public float currenCooldownTime = 0;
+    public int Number = 1;
+    public float currentTime = 0;
 }
 
 [CreateAssetMenu(fileName = "New Skill Data", menuName = "Skill Data", order = 1)]
@@ -27,6 +28,7 @@ public class Skill_Data_SO : ScriptableObject
     public float cooldownTime = 1;
     public float activeTime = 1;
     public int Damage = 6;
+    public int Number = 1;
 
     public Skill_Data GetDataInstance()
     {
@@ -39,6 +41,7 @@ public class Skill_Data_SO : ScriptableObject
             cooldownTime = this.cooldownTime,
             activeTime = this.activeTime,
             Damage = this.Damage,
+            Number = this.Number,
         };
     }
 

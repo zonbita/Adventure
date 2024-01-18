@@ -13,7 +13,7 @@ public class Explosion : MonoBehaviour
         {
             if (c.CompareTag("Player"))
             {
-                c.gameObject.GetComponent<Health>().TakeDam(5);
+                c.gameObject.GetComponent<I_Damage>()?.TakeDamageEffect(2, 5);
                 break;
             }
                 

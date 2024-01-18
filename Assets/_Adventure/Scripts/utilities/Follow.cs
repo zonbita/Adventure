@@ -34,7 +34,7 @@ public class Follow : MonoBehaviour
                 this.gameObject.SetActive(false);
                 updateEnabled = false;
                 if(this.gameObject.GetComponent<Coin>())
-                    GameManager.Instance.TotalCoin++;
+                    GameManager.Instance.TotalCoin += GameManager.Instance.CoinLuck * 1;
                 this.gameObject.GetComponent<Exp>()?.Up_Exp();
 
 

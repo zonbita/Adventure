@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class Health : MonoBehaviour, I_Damage
 {
     public int maxHealth;
     [HideInInspector] public int currentHealth;
@@ -12,6 +12,8 @@ public class Health : MonoBehaviour
     public HealthBar healthBar;
 
     private float safeTime;
+    private int hpregen;
+    Coroutine regenCoroutine;
     public float safeTimeDuration = 0f;
     public bool isDead = false;
     public bool camShake = false;
@@ -42,7 +44,53 @@ public class Health : MonoBehaviour
             healthBar.UpdateHealth(currentHealth, maxHealth);
     }
 
-    public void TakeDam(int damage)
+    public void Init(int max)
+    {
+        maxHealth = max;
+        if (healthBar != null)
+            healthBar.UpdateHealth(currentHealth, maxHealth);
+    }
+    private void Update()
+    {
+        if (safeTime > 0)
+        {
+            safeTime -= Time.deltaTime;
+        }
+    }
+
+    public void Regen(int hp)
+    {
+        hpregen = hp;
+
+        if (regenCoroutine != null) StopCoroutine("LoopRegen");
+
+        regenCoroutine = StartCoroutine("LoopRegen");
+    }
+
+    IEnumerator LoopRegen()
+    {
+        while (currentHealth < maxHealth)
+        {
+            currentHealth += hpregen;
+
+            if (currentHealth >= maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+            if (healthBar != null)
+                healthBar.UpdateHealth(currentHealth, maxHealth);
+            yield return new WaitForSeconds(1);
+        }
+    }
+
+        
+
+    public void TakeDamageEffect(int damage, int max)
+    {
+       
+    }
+
+    public void TakeDamage(int damage)
     {
         if (safeTime <= 0)
         {
@@ -68,6 +116,7 @@ public class Health : MonoBehaviour
                     Destroy(this.gameObject, 0.125f);
 
                 }
+                if (this.gameObject.tag == "Player") GameManager.Instance.GameOver();
                 isDead = true;
             }
 
@@ -76,15 +125,6 @@ public class Health : MonoBehaviour
                 healthBar.UpdateHealth(currentHealth, maxHealth);
 
             safeTime = safeTimeDuration;
-        }
-    }
-
-
-    private void Update()
-    {
-        if (safeTime > 0)
-        {
-            safeTime -= Time.deltaTime;
         }
     }
 }

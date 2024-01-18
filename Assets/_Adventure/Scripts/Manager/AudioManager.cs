@@ -17,13 +17,13 @@ public class AudioManager : MonoBehaviour
     AudioHighPassFilter bgmEffect;
 
     [Header("#SFX")]
-    [Tooltip(" 0: Dead, 1: Hit, 2: LevelUp, 3: Lose, 4: Melee, 5: Range, 6: Drop, 7: Win, 8: Loot, 9:Confirm, 10:Buy")] public AudioClip[] sfxClips;
+    [Tooltip(" 0: Dead, 1: Hit, 2: LevelUp, 3: Lose, 4: Melee, 5: Range, 6: Drop, 7: Win, 8: Loot, 9:Confirm, 10:Buy, 11:LootCoin")] public AudioClip[] sfxClips;
     public float sfxVolume;
     public int channels;
     AudioSource[] sfxPlayers;
     int channelIndex;
 
-    public enum Sfx { Dead, Hit, LevelUp, Lose, Melee, Range, Drop, Win, Loot, Confirm, Buy}
+    public enum Sfx { Dead, Hit, LevelUp, Lose, Melee, Range, Drop, Win, Loot, Confirm, Buy, LootCoin}
 
     void Awake()
     {

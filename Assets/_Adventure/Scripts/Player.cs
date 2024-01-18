@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -38,6 +39,38 @@ public class Player : MonoBehaviour
         GameManager.Instance.GameStart += GameStart;
          
        
+    }
+
+    public void Init(List<Stat> Stats, Sprite sprite)
+    {
+        foreach (Stat s in Stats)
+        {
+
+
+            switch (s._StatName)
+            {
+                case StatName.Speed:
+                    moveSpeed = s._StatValue;
+                    break;
+                case StatName.LootRadius:
+                    GetComponentInChildren<Looter>().SetLooterRadius(s._StatValue);
+                    break;
+                case StatName.HP:
+                    health.Init((int)s._StatValue);
+                    break;
+                case StatName.Luck:
+                    GameManager.Instance.CoinLuck = (int)s._StatValue;
+                    break;
+                case StatName.Regen:
+                    health.Regen((int)s._StatValue);
+                    break;
+                default:
+                    
+                    break;
+            }
+        }
+        if(!sprite)
+            characterSR.sprite = sprite;
     }
 
     private void GameStart()
@@ -105,11 +138,6 @@ public class Player : MonoBehaviour
         {
             GameManager.Instance.GameOver();
         }
-    }
-
-    public void ChangeSprite(Sprite s)
-    {
-        characterSR.sprite = s;
     }
 
     private void OnEnable()

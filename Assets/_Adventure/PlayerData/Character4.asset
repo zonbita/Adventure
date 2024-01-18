@@ -15,6 +15,17 @@ MonoBehaviour:
   id: 0
   playerName: Jelly Foot
   SpriteCharacter: {fileID: 21300000, guid: 2d5d6782fc427ad498ff00ded71060f4, type: 3}
-  currentHealth: 0
-  maxHealth: 0
-  price: 250
+  price: 25
+  Stats:
+  - _StatName: 0
+    _StatType: 1
+    _StatValue: 180
+  - _StatName: 3
+    _StatType: 1
+    _StatValue: 5
+  - _StatName: 5
+    _StatType: 1
+    _StatValue: 1
+  - _StatName: 7
+    _StatType: 1
+    _StatValue: 5

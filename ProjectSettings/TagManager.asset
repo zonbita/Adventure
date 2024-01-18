@@ -53,3 +53,6 @@ TagManager:
   - name: Coin
     uniqueID: 1032920331
     locked: 0
+  - name: Bullet
+    uniqueID: 4256057095
+    locked: 0

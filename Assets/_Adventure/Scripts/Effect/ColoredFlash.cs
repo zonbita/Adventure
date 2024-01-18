@@ -6,14 +6,16 @@ public class ColoredFlash : MonoBehaviour
 {
     [SerializeField] private Material flashMaterial;
     [SerializeField] private float duration;
-    [SerializeField] SpriteRenderer spriteRenderer;
+    SpriteRenderer spriteRenderer;
 
     private Material originalMaterial;
     private Coroutine flashRoutine;
 
     void Start()
     {
-        originalMaterial = spriteRenderer.material;
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (spriteRenderer)
+            originalMaterial = spriteRenderer.material;
         flashMaterial = new Material(flashMaterial);
     }
 
@@ -34,6 +36,7 @@ public class ColoredFlash : MonoBehaviour
         flashMaterial.color = color;
 
         yield return new WaitForSeconds(duration);
+
 
         spriteRenderer.material = originalMaterial;
 
