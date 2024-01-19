@@ -8,5 +8,8 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/_Adventure/Scenes/GamePlay.unity
+    guid: 27b5db167ade8134487d7765c3273507
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: b494df525fa176742a167537822610a3, type: 2}

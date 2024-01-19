@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
-using UnityEditor.Timeline.Actions;
-using Unity.VisualScripting;
 
 public class Coin : MonoBehaviour
 {

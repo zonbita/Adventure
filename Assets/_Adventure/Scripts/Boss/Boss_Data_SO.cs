@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public enum BossType { Nemesis, Assassin };
@@ -11,7 +10,7 @@ public class Boss_Data
     public BossType BossType;
     public string Name;
     public Sprite SpriteCharacter;
-    public AnimatorController AnimatorController;
+    public RuntimeAnimatorController AnimatorController;
     public int maxHealth;
     public float moveSpeed = 2f;
     public List<Skill_Data_SO> bossSkills;
@@ -24,7 +23,7 @@ public class Boss_Data_SO : ScriptableObject
     public BossType bossName;
     public string Name;
     public Sprite SpriteCharacter;
-    public AnimatorController AnimatorController;
+    public RuntimeAnimatorController AnimatorController;
     public int maxHealth;
     public float moveSpeed;
     public List<Skill_Data_SO> bossSkills;

@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Build.Pipeline;
 using UnityEngine;
 
 public class Boss_1 : Boss_Base
