@@ -7,7 +7,6 @@ public class Bullet_Homing : Bullet
     Transform target;
     public float rotateSpeed = 200f;
     public float speed = 5f;
-
     public virtual void Init(int minDamage, int maxDamage, Transform Target)
     {
         this.minDamage = minDamage;
@@ -34,6 +33,8 @@ public class Bullet_Homing : Bullet
     {
         if(target != null)
         {
+            if(rb.isKinematic) rb.isKinematic = false;
+
             Vector2 direction = (Vector2)target.position - rb.position;
 
             direction.Normalize();
@@ -50,6 +51,8 @@ public class Bullet_Homing : Bullet
                 target = GameManager.Instance.Player.transform;
             else
                 target = WeaponManager.instance.FindNearestEnemy(this.transform.position);
+
+            if (!rb.isKinematic) rb.isKinematic = true;
         }
 
     }

@@ -123,6 +123,7 @@ public class Skill_Base : MonoBehaviour, I_Skill
 
     IEnumerator ShootMultiDirection(Skill_Data s)
     {
+        print("a");
         if (s.GO_Skill)
         {
             for (int index = 0; index < s.Number; index++)

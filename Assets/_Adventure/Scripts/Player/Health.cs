@@ -7,7 +7,7 @@ using UnityEngine;
 public class Health : MonoBehaviour, I_Damage
 {
     public int maxHealth;
-    [HideInInspector] public int currentHealth;
+    public int currentHealth;
     public int XP = 1;
     public HealthBar healthBar;
 
@@ -92,39 +92,35 @@ public class Health : MonoBehaviour, I_Damage
 
     public void TakeDamage(int damage)
     {
-        if (safeTime <= 0)
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
         {
-            currentHealth -= damage;
-
-            if (currentHealth <= 0)
+            currentHealth = 0;
+            if (this.gameObject.tag == "Enemy")
             {
-                currentHealth = 0;
-                if (this.gameObject.tag == "Enemy")
+
+                WeaponManager.instance.RemoveEnemyToFireRange(this.transform);
+                GameManager gm = GameManager.Instance;
+                if (gm)
                 {
-
-                    WeaponManager.instance.RemoveEnemyToFireRange(this.transform);
-                    GameManager gm = GameManager.Instance;
-                    if (gm)
-                    {
-                        Vector3 p = this.transform.position;
-                        gm.ItemSpawner.GetComponent<ItemSpawner>().SpawnRandomItem(p);
-                        gm.SpawnExp(p, XP);
-                        gm.SpawnDeathEffect(p);
-                    }
-                    AudioManager.instance?.PlaySfx(AudioManager.Sfx.Dead);
-
-                    Destroy(this.gameObject, 0.125f);
-
+                    Vector3 p = this.transform.position;
+                    gm.ItemSpawner.GetComponent<ItemSpawner>().SpawnRandomItem(p);
+                    gm.SpawnExp(p, XP);
+                    gm.SpawnDeathEffect(p);
                 }
-                if (this.gameObject.tag == "Player") GameManager.Instance.GameOver();
-                isDead = true;
+                AudioManager.instance?.PlaySfx(AudioManager.Sfx.Dead);
+
+                Destroy(this.gameObject, 0.125f);
+
             }
-
-            // If player then update health bar
-            if (healthBar != null)
-                healthBar.UpdateHealth(currentHealth, maxHealth);
-
-            safeTime = safeTimeDuration;
+            if (this.gameObject.tag == "Player") GameManager.Instance.GameOver();
+            isDead = true;
         }
+
+        // If player then update health bar
+        if (healthBar != null)
+            healthBar.UpdateHealth(currentHealth, maxHealth);
+        
     }
 }

@@ -60,7 +60,7 @@ public class GameManager : Singleton<GameManager>
 
     // Coin
     private int totalCoin = 0;
-    [SerializeField] private int ReviveCoin = 2;
+    [SerializeField] private int ReviveCoin = 10;
     public int CoinLuck = 1;
 
     // Prefab ID
@@ -244,7 +244,7 @@ public class GameManager : Singleton<GameManager>
                 group = LosePanel.GetComponent<CanvasGroup>();
                 PanelAlpha(group, 1);
                 Time.timeScale = 0;
-                LosePanel.GetComponentsInChildren<Button>()[0].interactable = (TotalCoin >= 200 ? true: false);
+                LosePanel.GetComponentsInChildren<Button>()[0].interactable = (TotalCoin >= 10 ? true: false);
                 break;
             case 2:
                 group = ShopPanel.GetComponent<CanvasGroup>();

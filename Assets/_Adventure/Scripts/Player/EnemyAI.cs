@@ -25,7 +25,7 @@ public class EnemyAI : MonoBehaviour
     Path path;
     Seeker seeker;
     Rigidbody2D rb;
-    Health PlayerHealth;
+    I_Damage[] dmg;
     Coroutine moveCoroutine;
     Vector2 force = new Vector2(-1f, 1f);
     public float freezeDurationTime;
@@ -112,8 +112,8 @@ public class EnemyAI : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            PlayerHealth = collision.GetComponent<Health>();
-            InvokeRepeating("DamagePlayer", 0, 1f);
+            dmg = collision.GetComponents<I_Damage>();
+            InvokeRepeating("DamagePlayer", 0, .5f);
         }
 
     }
@@ -122,19 +122,24 @@ public class EnemyAI : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+           
             CancelInvoke("DamagePlayer");
-            PlayerHealth = null;
+            dmg = null;
         }
 
     }
 
     void DamagePlayer()
     {
+        if (dmg == null) return;
+
         int damage = Random.Range(minDamage, maxDamage);
-        PlayerHealth.GetComponent<I_Damage>().TakeDamage(damage);
-        // Show Effect
-        PlayerHealth.GetComponent<I_Damage>().TakeDamageEffect(damage, maxDamage);
-  
+        foreach (I_Damage i in dmg)
+        {
+            i.TakeDamage(damage);
+            i.TakeDamageEffect(damage, maxDamage);
+        }
+
     }
 
     public void ChangeEnemySprite(string spriteName)

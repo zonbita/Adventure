@@ -27,7 +27,7 @@ public class EnemyController : MonoBehaviour, I_Damage
                 
                 Animator animator = instance.GetComponentInChildren<Animator>();
                 if (damage >= max - 1) {
-                    dmg = "Crits " + dmg;
+                    dmg = "Crit " + dmg;
                     animator.Play("red");
                     
                 } 

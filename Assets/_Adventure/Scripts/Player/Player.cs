@@ -113,33 +113,6 @@ public class Player : MonoBehaviour
                 characterSR.flipX = false;
     }
 
-    public void TakeDamageEffect(int damage)
-    {
-        if (GameManager.Instance.damPopUp != null)
-        {
-            if(GameManager.Instance.PopupID != -1)
-            {
-                Transform instance = GameManager.Instance.pool.Get(GameManager.Instance.PopupID).transform;
-                instance.position = transform.position + new Vector3(UnityEngine.Random.Range(-0.3f, 0.3f), 0.5f, 0);
-                instance.GetComponentInChildren<TextMeshProUGUI>().text = damage.ToString();
-                Animator animator = instance.GetComponentInChildren<Animator>();
-                animator.Play("red");
-            }
-            else
-            {
-                GameObject instance = Instantiate(GameManager.Instance.damPopUp, transform.position + new Vector3(UnityEngine.Random.Range(-0.3f, 0.3f), 0.5f, 0), Quaternion.identity);
-                instance.GetComponentInChildren<TextMeshProUGUI>().text = damage.ToString();
-                Animator animator = instance.GetComponentInChildren<Animator>();
-                animator.Play("red");
-            }
-
-        }
-        if (health.isDead)
-        {
-            GameManager.Instance.GameOver();
-        }
-    }
-
     private void OnEnable()
     {
         //controls.Enable();
@@ -149,4 +122,5 @@ public class Player : MonoBehaviour
     {
        // controls.Disable();
     }
+
 }

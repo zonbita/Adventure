@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -11754,7 +11754,6 @@ TextureImporter:
       All_Fire_Bullet_Pixel_16x16_04_258: -985370172
       All_Fire_Bullet_Pixel_16x16_04_20: -213980841
       All_Fire_Bullet_Pixel_16x16_04_490: 845605210
-      All_Fire_Bullet_Pixel_16x16_04_512: -220174631
       All_Fire_Bullet_Pixel_16x16_04_243: -963903860
       All_Fire_Bullet_Pixel_16x16_04_131: -1714103720
       All_Fire_Bullet_Pixel_16x16_04_182: -1535587592
@@ -11881,12 +11880,12 @@ TextureImporter:
       All_Fire_Bullet_Pixel_16x16_04_382: 347853795
       All_Fire_Bullet_Pixel_16x16_04_450: 875980209
       All_Fire_Bullet_Pixel_16x16_04_421: -2139712504
+      All_Fire_Bullet_Pixel_16x16_04_533: -880796973
       All_Fire_Bullet_Pixel_16x16_04_527: -1750960911
       All_Fire_Bullet_Pixel_16x16_04_281: 196676268
       All_Fire_Bullet_Pixel_16x16_04_373: 1525613206
       All_Fire_Bullet_Pixel_16x16_04_391: 1703247914
       All_Fire_Bullet_Pixel_16x16_04_106: -225880587
-      All_Fire_Bullet_Pixel_16x16_04_533: -880796973
       All_Fire_Bullet_Pixel_16x16_04_493: 611355985
       All_Fire_Bullet_Pixel_16x16_04_383: 2039027384
       All_Fire_Bullet_Pixel_16x16_04_468: -1136183378
@@ -12021,11 +12020,11 @@ TextureImporter:
       All_Fire_Bullet_Pixel_16x16_04_312: 1653825385
       All_Fire_Bullet_Pixel_16x16_04_10: 1084791316
       All_Fire_Bullet_Pixel_16x16_04_346: 169831867
-      All_Fire_Bullet_Pixel_16x16_04_351: -1319734250
+      All_Fire_Bullet_Pixel_16x16_04_419: 2126557621
       All_Fire_Bullet_Pixel_16x16_04_338: 1518723098
       All_Fire_Bullet_Pixel_16x16_04_165: 78955157
       All_Fire_Bullet_Pixel_16x16_04_23: -394127183
-      All_Fire_Bullet_Pixel_16x16_04_419: 2126557621
+      All_Fire_Bullet_Pixel_16x16_04_351: -1319734250
       All_Fire_Bullet_Pixel_16x16_04_250: -520236764
       All_Fire_Bullet_Pixel_16x16_04_192: -1571770071
       All_Fire_Bullet_Pixel_16x16_04_363: -563727048
@@ -12044,9 +12043,8 @@ TextureImporter:
       All_Fire_Bullet_Pixel_16x16_04_387: 101267926
       All_Fire_Bullet_Pixel_16x16_04_57: 255507278
       All_Fire_Bullet_Pixel_16x16_04_404: 1897167513
-      All_Fire_Bullet_Pixel_16x16_04_155: 1446660484
-      All_Fire_Bullet_Pixel_16x16_04_437: 1257207934
       All_Fire_Bullet_Pixel_16x16_04_414: -1251152804
+      All_Fire_Bullet_Pixel_16x16_04_155: 1446660484
       All_Fire_Bullet_Pixel_16x16_04_214: 933347177
       All_Fire_Bullet_Pixel_16x16_04_156: -719689452
       All_Fire_Bullet_Pixel_16x16_04_219: 1862482270
@@ -12054,6 +12052,7 @@ TextureImporter:
       All_Fire_Bullet_Pixel_16x16_04_157: -1073457354
       All_Fire_Bullet_Pixel_16x16_04_37: 416034591
       All_Fire_Bullet_Pixel_16x16_04_350: 1687164892
+      All_Fire_Bullet_Pixel_16x16_04_437: 1257207934
       All_Fire_Bullet_Pixel_16x16_04_344: -956735236
       All_Fire_Bullet_Pixel_16x16_04_48: -1011267861
       All_Fire_Bullet_Pixel_16x16_04_42: -370791845
@@ -12064,9 +12063,9 @@ TextureImporter:
       All_Fire_Bullet_Pixel_16x16_04_361: -709991123
       All_Fire_Bullet_Pixel_16x16_04_120: -871469311
       All_Fire_Bullet_Pixel_16x16_04_203: -897791448
-      All_Fire_Bullet_Pixel_16x16_04_325: -1377995293
       All_Fire_Bullet_Pixel_16x16_04_357: -728999843
       All_Fire_Bullet_Pixel_16x16_04_473: -1186373013
+      All_Fire_Bullet_Pixel_16x16_04_325: -1377995293
       All_Fire_Bullet_Pixel_16x16_04_90: 1477956773
       All_Fire_Bullet_Pixel_16x16_04_193: -1273886770
       All_Fire_Bullet_Pixel_16x16_04_300: -1917205554
@@ -12074,8 +12073,8 @@ TextureImporter:
       All_Fire_Bullet_Pixel_16x16_04_82: 1462964104
       All_Fire_Bullet_Pixel_16x16_04_261: -595187141
       All_Fire_Bullet_Pixel_16x16_04_91: 705547348
-      All_Fire_Bullet_Pixel_16x16_04_168: -93603647
       All_Fire_Bullet_Pixel_16x16_04_160: 1598147434
+      All_Fire_Bullet_Pixel_16x16_04_168: -93603647
       All_Fire_Bullet_Pixel_16x16_04_328: 1867199893
       All_Fire_Bullet_Pixel_16x16_04_29: 465652535
       All_Fire_Bullet_Pixel_16x16_04_215: 1141018471
@@ -12265,17 +12264,18 @@ TextureImporter:
       All_Fire_Bullet_Pixel_16x16_04_333: 600323671
       All_Fire_Bullet_Pixel_16x16_04_498: 175058718
       All_Fire_Bullet_Pixel_16x16_04_60: -452839233
+      All_Fire_Bullet_Pixel_16x16_04_512: -220174631
       All_Fire_Bullet_Pixel_16x16_04_171: -1769137179
       All_Fire_Bullet_Pixel_16x16_04_185: 1054424999
-      All_Fire_Bullet_Pixel_16x16_04_455: -1211676119
       All_Fire_Bullet_Pixel_16x16_04_6: -46251974
       All_Fire_Bullet_Pixel_16x16_04_12: 1912470507
       All_Fire_Bullet_Pixel_16x16_04_305: 1822916367
       All_Fire_Bullet_Pixel_16x16_04_112: 281754847
+      All_Fire_Bullet_Pixel_16x16_04_455: -1211676119
       All_Fire_Bullet_Pixel_16x16_04_287: -1390028194
       All_Fire_Bullet_Pixel_16x16_04_431: -1940787319
-      All_Fire_Bullet_Pixel_16x16_04_187: 2082710606
       All_Fire_Bullet_Pixel_16x16_04_260: 1412624104
+      All_Fire_Bullet_Pixel_16x16_04_187: 2082710606
       All_Fire_Bullet_Pixel_16x16_04_505: -13548483
       All_Fire_Bullet_Pixel_16x16_04_294: 1898512338
       All_Fire_Bullet_Pixel_16x16_04_317: -680703360

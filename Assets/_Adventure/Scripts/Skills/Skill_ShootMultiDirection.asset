@@ -15,7 +15,7 @@ MonoBehaviour:
   SkillType: 1
   Stage: 0
   SkillName: ShootMultiDirection
-  GO_Skill: {fileID: 8488780647853429835, guid: f8a0ece0ca3b4eb4184f78c813344197, type: 3}
+  GO_Skill: {fileID: 8488780647853429835, guid: f450077b3041cac4d82007ac7e4d0ac8, type: 3}
   cooldownTime: 1
   activeTime: 1
   Damage: 6

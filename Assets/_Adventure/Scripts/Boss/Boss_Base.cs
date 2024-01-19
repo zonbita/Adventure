@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using UnityEditorInternal;
+using UnityEditor.Animations;
 
 public class Boss_Base : MonoBehaviour
 {
@@ -14,7 +16,8 @@ public class Boss_Base : MonoBehaviour
     public int minDamage = 2;
     public int maxDamage = 5;
 
-    [HideInInspector] Transform target;
+    [HideInInspector] protected Transform target;
+    [SerializeField] protected Transform SpawnProjectile;
 
     Vector2 force;
     Health health;
@@ -23,12 +26,19 @@ public class Boss_Base : MonoBehaviour
     Coroutine moveCoroutine;
     Rigidbody2D rb;
     SpriteRenderer sr;
+    protected Animator animator;
     float distance;
     bool StopMove = false;
+
+    protected static readonly int A_Idle = Animator.StringToHash("Idle");
+    protected static readonly int A_Death = Animator.StringToHash("Death");
+    protected static readonly int A_Walk = Animator.StringToHash("Walk");
+    protected static readonly int A_Cast = Animator.StringToHash("Cast");
 
     protected virtual void Awake()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
+        animator = GetComponentInChildren<Animator>();
         health = GetComponent<Health>();
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
@@ -44,6 +54,7 @@ public class Boss_Base : MonoBehaviour
     }
     protected virtual void Start()
     {
+        
         InvokeRepeating("CalculatePath", 0f, repeatTimeUpdatePath);
         InvokeRepeating("ChangeFace", 0f, 0.2f);
     }
@@ -72,6 +83,7 @@ public class Boss_Base : MonoBehaviour
     {
         if (moveCoroutine != null) StopCoroutine(moveCoroutine);
         StopMove = true;
+        animator.SetBool("Walk", false);
     }
 
     public void EnableMovement()
@@ -89,6 +101,7 @@ public class Boss_Base : MonoBehaviour
     }
     IEnumerator MoveToTargetCoroutine()
     {
+        if(!animator.GetBool("Walk")) animator.SetBool("Walk", true);
         int currentWP = 0;
 
         while (currentWP < path.vectorPath.Count)
@@ -101,6 +114,8 @@ public class Boss_Base : MonoBehaviour
             float distance = Vector2.Distance(rb.position, path.vectorPath[currentWP]);
             if (distance < nextWayPointDistance)
                 currentWP++;
+
+            
             yield return null;
         }
     }
@@ -126,7 +141,20 @@ public class Boss_Base : MonoBehaviour
     {
         int damage = Random.Range(minDamage, maxDamage);
 
-        health.GetComponent<Player>()?.TakeDamageEffect(damage);
+        health.GetComponent<I_Damage>()?.TakeDamageEffect(damage, maxDamage);
 
     }
+
+    public void RotateGun(Vector3 pos)
+    {
+        Vector2 lookDir = pos - SpawnProjectile.transform.position;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+
+        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        SpawnProjectile.transform.rotation = rotation;
+
+        if (SpawnProjectile.transform.eulerAngles.z > 90 && SpawnProjectile.transform.eulerAngles.z < 270) SpawnProjectile.transform.localScale = new Vector3(1, -1, 0);
+        else SpawnProjectile.transform.localScale = new Vector3(1, 1, 0);
+    }
+
 }
